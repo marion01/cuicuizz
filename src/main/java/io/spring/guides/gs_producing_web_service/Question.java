@@ -2,7 +2,7 @@
 // Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.7 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2019.02.19 à 10:14:51 AM CET 
+// Généré le : 2019.02.19 à 01:51:59 PM CET 
 //
 
 
@@ -26,6 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="value" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="theme" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -37,13 +38,15 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "question", propOrder = {
     "id",
-    "value"
+    "value",
+    "theme"
 })
 public class Question {
 
     protected int id;
     @XmlElement(required = true)
     protected String value;
+    protected int theme;
 
     /**
      * Obtient la valeur de la propriété id.
@@ -83,6 +86,22 @@ public class Question {
      */
     public void setValue(String value) {
         this.value = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété theme.
+     * 
+     */
+    public int getTheme() {
+        return theme;
+    }
+
+    /**
+     * Définit la valeur de la propriété theme.
+     * 
+     */
+    public void setTheme(int value) {
+        this.theme = value;
     }
 
 }

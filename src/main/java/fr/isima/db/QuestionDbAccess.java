@@ -1,4 +1,4 @@
-package fr.isima.cuicuizz;
+package fr.isima.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -35,6 +35,32 @@ public class QuestionDbAccess {
 	 */
 	public Map<Integer, QuestionModel> selectAll() {
 		final String sql = "SELECT Id, Question, ThemeId FROM Question";
+		final Map<Integer, QuestionModel> results = new HashMap<>();
+		try (Connection conn = this.connect();
+				Statement stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery(sql)) {
+
+			// loop through the result set
+			while (rs.next()) {
+				System.out.println(rs.getInt("Id") + "\t" + rs.getString("Question") + "\t" + rs.getDouble("ThemeId"));
+				final QuestionModel qm = new QuestionModel();
+				qm.setId(rs.getInt("Id"));
+				qm.setQuestion(rs.getString("Question"));
+				results.put(rs.getInt("Id"), qm);
+			}
+			return results;
+		} catch (final SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
+
+	/**
+	 * select all rows in the warehouses table
+	 */
+	public Map<Integer, QuestionModel> selectQuestionFromTheme(int theme) {
+		final String sql = String.format("SELECT Id, Question, ThemeId FROM Question WHERE ThemeId=%s", theme);
+		System.out.println(sql);
 		final Map<Integer, QuestionModel> results = new HashMap<>();
 		try (Connection conn = this.connect();
 				Statement stmt = conn.createStatement();

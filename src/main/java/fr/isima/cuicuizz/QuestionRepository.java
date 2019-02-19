@@ -10,20 +10,24 @@ import org.springframework.util.Assert;
 
 import fr.isima.cuicuizz.converters.QuestionConverter;
 import fr.isima.cuicuizz.model.QuestionModel;
+import fr.isima.db.QuestionDbAccess;
 import io.spring.guides.gs_producing_web_service.Question;
 
 @Component
 public class QuestionRepository {
 	private static Map<Integer, QuestionModel> questions = new HashMap<>();
+	private static QuestionDbAccess questionDbAccess = new QuestionDbAccess();
 
 	@PostConstruct
 	public void initData() {
-		final QuestionDbAccess questionDbAccess = new QuestionDbAccess();
-		questions = questionDbAccess.selectAll();
+		questions = questionDbAccess.selectQuestionFromTheme(0);
 	}
 
-	public Question findQuestion(Integer id) {
-		Assert.notNull(id, "The question id must not be null");
-		return QuestionConverter.convert(questions.get(id));
+	public Question findQuestion(Integer themeId) {
+		Assert.notNull(themeId, "The theme id must not be null");
+
+		questions = questionDbAccess.selectQuestionFromTheme(themeId);
+		System.out.println(questions.size());
+		return QuestionConverter.convert(questions.get(0));
 	}
 }

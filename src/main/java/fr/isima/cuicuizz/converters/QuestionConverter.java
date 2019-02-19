@@ -3,6 +3,11 @@ package fr.isima.cuicuizz.converters;
 import fr.isima.cuicuizz.model.QuestionModel;
 import io.spring.guides.gs_producing_web_service.Question;
 
+/**
+ * Converter used in order to change types from dbModel to web model
+ * 
+ *
+ */
 public class QuestionConverter {
 
 	public static Question convert(QuestionModel questionModel) {
