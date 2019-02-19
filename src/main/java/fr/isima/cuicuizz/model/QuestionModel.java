@@ -1,6 +1,6 @@
 package fr.isima.cuicuizz.model;
 
-public class Question {
+public class QuestionModel {
 	
 	private int id;
 	private String question;
