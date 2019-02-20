@@ -29,12 +29,12 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 		wsdl11Definition.setPortTypeName("QuestionsPort");
 		wsdl11Definition.setLocationUri("/ws");
 		wsdl11Definition.setTargetNamespace("http://spring.io/guides/gs-producing-web-service");
-		wsdl11Definition.setSchema(countriesSchema);
+		wsdl11Definition.setSchema(questionsSchema());
 		return wsdl11Definition;
 	}
 
 	@Bean
-	public XsdSchema countriesSchema() {
+	public XsdSchema questionsSchema() {
 		return new SimpleXsdSchema(new ClassPathResource("questions.xsd"));
 	}
 }

@@ -2,7 +2,7 @@
 // Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.7 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2019.02.19 à 10:14:51 AM CET 
+// Généré le : 2019.02.20 à 04:17:43 PM CET 
 //
 
 
@@ -24,7 +24,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="themeId" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="nbQuestions" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,27 +36,45 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "id"
+    "themeId",
+    "nbQuestions"
 })
 @XmlRootElement(name = "getQuestionRequest")
 public class GetQuestionRequest {
 
-    protected int id;
+    protected int themeId;
+    protected int nbQuestions;
 
     /**
-     * Obtient la valeur de la propriété id.
+     * Obtient la valeur de la propriété themeId.
      * 
      */
-    public int getId() {
-        return id;
+    public int getThemeId() {
+        return themeId;
     }
 
     /**
-     * Définit la valeur de la propriété id.
+     * Définit la valeur de la propriété themeId.
      * 
      */
-    public void setId(int value) {
-        this.id = value;
+    public void setThemeId(int value) {
+        this.themeId = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété nbQuestions.
+     * 
+     */
+    public int getNbQuestions() {
+        return nbQuestions;
+    }
+
+    /**
+     * Définit la valeur de la propriété nbQuestions.
+     * 
+     */
+    public void setNbQuestions(int value) {
+        this.nbQuestions = value;
     }
 
 }

@@ -24,7 +24,7 @@ public class QuestionEndpoint {
 	@ResponsePayload
 	public GetQuestionResponse getQuestion(@RequestPayload GetQuestionRequest request) {
 		final GetQuestionResponse response = new GetQuestionResponse();
-		response.setQuestion(questionRepository.findQuestion(request.getId()));
+		response.getQuestions().addAll(questionRepository.findQuestion(request.getThemeId(), request.getNbQuestions()));
 
 		return response;
 	}

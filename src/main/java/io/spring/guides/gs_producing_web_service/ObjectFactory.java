@@ -2,7 +2,7 @@
 // Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.7 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2019.02.19 à 10:14:51 AM CET 
+// Généré le : 2019.02.20 à 04:17:43 PM CET 
 //
 
 
@@ -58,6 +58,14 @@ public class ObjectFactory {
      */
     public GetQuestionRequest createGetQuestionRequest() {
         return new GetQuestionRequest();
+    }
+
+    /**
+     * Create an instance of {@link Answer }
+     * 
+     */
+    public Answer createAnswer() {
+        return new Answer();
     }
 
 }

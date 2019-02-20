@@ -1,6 +1,7 @@
 package fr.isima.cuicuizz;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
@@ -22,8 +23,14 @@ public class QuestionRepository {
 		questions = questionDbAccess.selectAll();
 	}
 
-	public Question findQuestion(Integer id) {
-		Assert.notNull(id, "The question id must not be null");
-		return QuestionConverter.convert(questions.get(id));
+	public List<Question> findQuestion(Integer themeId, Integer nb) {
+		final QuestionDbAccess questionDbAccess = new QuestionDbAccess();
+		System.out.println("coucou");
+		Assert.notNull(themeId, "The question id must not be null");
+		final List<Question> questions = QuestionConverter
+				.convert(questionDbAccess.selectQuestionsFromTheme(themeId, nb));
+		System.out.println(questions.size());
+		System.out.println(questions.get(0).getValue());
+		return questions;
 	}
 }
