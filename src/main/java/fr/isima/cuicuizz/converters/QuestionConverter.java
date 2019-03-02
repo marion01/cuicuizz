@@ -12,16 +12,14 @@ public class QuestionConverter {
 		final Question question = new Question();
 		question.setId(questionModel.getId());
 		question.setValue(questionModel.getQuestion());
+		question.getAnswers().addAll(AnswerConverter.convert(questionModel.getAnswers()));
 		return question;
 	}
 
 	public static List<Question> convert(List<QuestionModel> questionsModel) {
 		final List<Question> questions = new ArrayList<>();
 		for (final QuestionModel questionModel : questionsModel) {
-			final Question question = new Question();
-			question.setId(questionModel.getId());
-			question.setValue(questionModel.getQuestion());
-			questions.add(question);
+			questions.add(convert(questionModel));
 		}
 		return questions;
 	}

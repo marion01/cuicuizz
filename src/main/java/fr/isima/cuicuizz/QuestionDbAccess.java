@@ -62,29 +62,45 @@ public class QuestionDbAccess {
 	 * select all rows in the warehouses table
 	 */
 	public List<QuestionModel> selectQuestionsFromTheme(int themeId, int nb) {
+
 		final String sql = String.format(
-				"SELECT Id,Question,IsCorrect,Answer FROM Question q Join Answer a on a.QuestionId=q.Id where ThemeId=%s;",
+				"SELECT Id, Question, ThemeId, Answer, IsCorrect FROM Question Join Answer on Answer.QuestionId = Question.Id where ThemeId=%s",
 				themeId);
+		System.out.println(sql);
 		final List<QuestionModel> results = new ArrayList<>();
 		try (Connection conn = this.connect();
 				Statement stmt = conn.createStatement();
-
 				ResultSet rs = stmt.executeQuery(sql)) {
 
-			// loop through the result set
+			double questionId = -1;
+			AnswerModel am;
+			QuestionModel qm = new QuestionModel();
 			while (rs.next()) {
-				System.out.println(rs.getInt("Id") + "\t" + rs.getString("Question") + "\t" + rs.getDouble("ThemeId"));
-				final QuestionModel qm = new QuestionModel();
-				qm.setId(rs.getInt("Id"));
-				qm.setQuestion(rs.getString("Question"));
-				qm.setAnswer(new AnswerModel());
-				qm.getAnswer().setAnswer(rs.getString("Answer"));
-				System.out.println("test");
-				qm.getAnswer().setIsCorrect(rs.getBoolean("IsCorrect"));
-				System.out.println("test2");
-				results.add(qm);
-				System.out.println(qm.getQuestion());
+				System.out.println(rs.getInt("Id") + "\t" + rs.getString("Question") + "\t" + rs.getDouble("ThemeId")
+						+ "\t" + rs.getString("Answer"));
+				if (questionId == rs.getInt("id")) {
+					am = new AnswerModel();
+					am.setAnswer(rs.getString("Answer"));
+					am.setIsCorrect(rs.getBoolean("IsCorrect"));
+					qm.getAnswers().add(am);
+				} else {
+					if (questionId != -1)
+						results.add(qm);
+					questionId = rs.getInt("Id");
+					qm = new QuestionModel();
+					qm.setId(rs.getInt("Id"));
+					qm.setQuestion(rs.getString("Question"));
+
+					am = new AnswerModel();
+					am.setAnswer(rs.getString("Answer"));
+					am.setIsCorrect(rs.getBoolean("IsCorrect"));
+					qm.getAnswers().add(am);
+				}
+
 			}
+			if (questionId != -1)
+				results.add(qm);
+			System.out.println(results.size());
 			return (results.size() > nb ? results.subList(0, nb) : results);
 		} catch (final SQLException e) {
 			System.out.println(e.getMessage());

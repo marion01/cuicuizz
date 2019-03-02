@@ -1,11 +1,14 @@
 package fr.isima.cuicuizz.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class QuestionModel {
 
 	private int id;
 	private String question;
 	private int themeId;
-	private AnswerModel answer;
+	private List<AnswerModel> answers;
 
 	public int getId() {
 		return id;
@@ -31,12 +34,15 @@ public class QuestionModel {
 		this.themeId = themeId;
 	}
 
-	public AnswerModel getAnswer() {
-		return answer;
+	public List<AnswerModel> getAnswers() {
+		if (answers == null) {
+			answers = new ArrayList<>();
+		}
+		return answers;
 	}
 
-	public void setAnswer(AnswerModel answer) {
-		this.answer = answer;
+	public void setAnswers(List<AnswerModel> answers) {
+		this.answers = answers;
 	}
 
 }

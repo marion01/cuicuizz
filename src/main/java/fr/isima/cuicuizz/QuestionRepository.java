@@ -20,7 +20,8 @@ public class QuestionRepository {
 	@PostConstruct
 	public void initData() {
 		final QuestionDbAccess questionDbAccess = new QuestionDbAccess();
-		questions = questionDbAccess.selectAll();
+		// questions = questionDbAccess.selectAll();
+		QuestionConverter.convert(questionDbAccess.selectQuestionsFromTheme(1, 10));
 	}
 
 	public List<Question> findQuestion(Integer themeId, Integer nb) {
