@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="fr.isima.cuicuizz.dbaccess.mybatis.dao.QuestionMapper">
+
+
+	
+	
+	<resultMap type="AnswerModel" id="AnswerModelMapper">
+		<id property="id" column="AnswerId" />
+		<result property="questionId" column="QuestionId" />
+		<result property="answer" column="Answer" />
+		<result property="isCorrect" column="IsCorrect" />
+	</resultMap>
+
+
+
+	<resultMap type="QuestionModel" id="QuestionModelMapper">
+		<id property="id" column="Id" />
+		<result property="question" column="Question" />
+		<result property="themeId" column="ThemeId" />
+		<collection property="answers" resultMap="AnswerModelMapper"/>
+	</resultMap>
+
+
+	<select id="selectAllQuestions" resultMap="QuestionModelMapper">
+		SELECT q.Id,q.Question,q.ThemeId,a.Id as AnswerId, a.QuestionId,a.Answer,a.IsCorrect 
+		FROM Question q
+		join Answer a on a.QuestionId=q.Id;
+	</select>
+
+</mapper>
+

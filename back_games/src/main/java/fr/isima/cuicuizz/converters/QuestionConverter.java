@@ -12,7 +12,7 @@ public class QuestionConverter {
 		final Question question = new Question();
 		question.setId(questionModel.getId());
 		question.setValue(questionModel.getQuestion());
-		question.getAnswers().addAll(AnswerConverter.convert(questionModel.getAnswers()));
+		// question.getAnswers().addAll(AnswerConverter.convert(questionModel.getAnswers()));
 		return question;
 	}
 

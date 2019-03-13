@@ -8,7 +8,7 @@ public class QuestionModel {
 	private int id;
 	private String question;
 	private int themeId;
-	private List<AnswerModel> answers;
+	private List<AnswerModel> answers = new ArrayList<>();
 
 	public int getId() {
 		return id;
@@ -35,9 +35,6 @@ public class QuestionModel {
 	}
 
 	public List<AnswerModel> getAnswers() {
-		if (answers == null) {
-			answers = new ArrayList<>();
-		}
 		return answers;
 	}
 
