@@ -34,4 +34,5 @@ public class DataConfig {
 		sessionFactory.setTypeAliasesPackage("fr.isima.cuicuizz.model");
 		return sessionFactory;
 	}
+
 }

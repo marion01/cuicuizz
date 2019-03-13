@@ -8,8 +8,6 @@
 
 package io.spring.guides.gs_producing_web_service;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -26,7 +24,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="questions" type="{http://spring.io/guides/gs-producing-web-service}question" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="nbQuestions" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -37,40 +35,27 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "questions"
+    "nbQuestions"
 })
-@XmlRootElement(name = "getQuestionResponse")
-public class GetQuestionResponse {
+@XmlRootElement(name = "getNbQuestionResponse")
+public class GetNbQuestionResponse {
 
-    protected List<Question> questions;
+    protected int nbQuestions;
 
     /**
-     * Gets the value of the questions property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the questions property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getQuestions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Question }
-     * 
+     * Obtient la valeur de la propriété nbQuestions.
      * 
      */
-    public List<Question> getQuestions() {
-        if (questions == null) {
-            questions = new ArrayList<Question>();
-        }
-        return this.questions;
+    public int getNbQuestions() {
+        return nbQuestions;
+    }
+
+    /**
+     * Définit la valeur de la propriété nbQuestions.
+     * 
+     */
+    public void setNbQuestions(int value) {
+        this.nbQuestions = value;
     }
 
 }

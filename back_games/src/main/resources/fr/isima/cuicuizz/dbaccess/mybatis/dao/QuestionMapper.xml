@@ -28,7 +28,12 @@
 	<select id="selectAllQuestions" resultMap="QuestionModelMapper">
 		SELECT q.Id,q.Question,q.ThemeId,a.Id as AnswerId, a.QuestionId,a.Answer,a.IsCorrect 
 		FROM Question q
-		join Answer a on a.QuestionId=q.Id;
+		join Answer a on a.QuestionId=q.Id
+		WHERE q.ThemeId=#{themeId};
+	</select>
+	
+	<select id="getNbQuestionFromTheme" resultType="Integer">
+		SELECT COUNT (1) FROM Question where ThemeId=#{themeId}; 
 	</select>
 
 </mapper>

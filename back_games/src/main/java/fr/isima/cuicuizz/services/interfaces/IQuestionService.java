@@ -8,4 +8,6 @@ public interface IQuestionService {
 
 	List<Question> findQuestion(Integer themeId, Integer nb);
 
+	Integer getNbQuestionFromTheme(Integer themeId);
+
 }

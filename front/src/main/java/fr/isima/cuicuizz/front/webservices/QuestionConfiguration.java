@@ -1,4 +1,4 @@
-package fr.isima.cuicuizz.front;
+package fr.isima.cuicuizz.front.webservices;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,8 +12,6 @@ public class QuestionConfiguration {
 		final Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
 		// this package must match the package in the <generatePackage> specified in
 		// pom.xml
-
-		marshaller.setContextPath("questions.wsdl");
 		marshaller.setContextPath("fr.isima.cuicuizz.front");
 		return marshaller;
 	}

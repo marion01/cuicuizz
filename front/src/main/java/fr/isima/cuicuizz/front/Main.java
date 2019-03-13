@@ -115,8 +115,7 @@ public class Main {
 	}
 
 	public static int getNumberQuestions() {
-		// recup nb max question
-		final int nbMax = 7;
+		final int nbMax = Application.questionClient.getNbQuestionsFromTheme(1).getNbQuestions();
 
 		boolean tooManyQuestion = true;
 		System.out.println("Choose the number of questions:");
@@ -129,7 +128,7 @@ public class Main {
 				tooManyQuestion = false;
 				if (nb > nbMax) {
 					tooManyQuestion = true;
-					System.out.println("There are not enought questions, choose less question");
+					System.out.println("There are not enough questions, choose less question");
 				}
 			} catch (final IOException e) {
 				// TODO Auto-generated catch block
@@ -161,6 +160,7 @@ public class Main {
 	public static boolean displayQuestion(Question q) throws IOException {
 		System.out.println(q.getValue());
 		final List<Answer> answers = q.getAnswers();
+		System.out.println(answers.size());
 		for (int i = 0; i < answers.size(); i++) {
 			System.out.println(i + "." + answers.get(i).getAnswer());
 		}

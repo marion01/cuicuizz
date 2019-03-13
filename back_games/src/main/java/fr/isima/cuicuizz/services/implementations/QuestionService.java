@@ -1,11 +1,13 @@
 package fr.isima.cuicuizz.services.implementations;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import fr.isima.cuicuizz.converters.QuestionConverter;
 import fr.isima.cuicuizz.dbaccess.mybatis.dao.QuestionMapper;
+import fr.isima.cuicuizz.model.QuestionModel;
 import fr.isima.cuicuizz.services.interfaces.IQuestionService;
 import io.spring.guides.gs_producing_web_service.Question;
 
@@ -17,6 +19,15 @@ public class QuestionService implements IQuestionService {
 
 	@Override
 	public List<Question> findQuestion(Integer themeId, Integer nb) {
-		return QuestionConverter.convert(questionMapper.selectAllQuestions());
+		final List<QuestionModel> questions = questionMapper.selectAllQuestions(themeId);
+
+		Collections.shuffle(questions);
+
+		return QuestionConverter.convert((questions.size() < nb) ? questions : questions.subList(0, nb));
+	}
+
+	@Override
+	public Integer getNbQuestionFromTheme(Integer themeId) {
+		return questionMapper.getNbQuestionFromTheme(themeId);
 	}
 }
