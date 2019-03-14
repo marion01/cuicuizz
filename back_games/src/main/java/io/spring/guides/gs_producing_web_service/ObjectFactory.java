@@ -1,8 +1,8 @@
 //
-// Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.7 
-// Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
+// Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.3.0 
+// Voir <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2019.03.14 à 11:36:12 AM CET 
+// Généré le : 2019.03.14 à 03:49:55 PM CET 
 //
 
 
@@ -37,19 +37,35 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetThemesResponse }
+     * Create an instance of {@link GetNbQuestionRequest }
      * 
      */
-    public GetThemesResponse createGetThemesResponse() {
-        return new GetThemesResponse();
+    public GetNbQuestionRequest createGetNbQuestionRequest() {
+        return new GetNbQuestionRequest();
     }
 
     /**
-     * Create an instance of {@link Theme }
+     * Create an instance of {@link GetNbQuestionResponse }
      * 
      */
-    public Theme createTheme() {
-        return new Theme();
+    public GetNbQuestionResponse createGetNbQuestionResponse() {
+        return new GetNbQuestionResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetQuestionRequest }
+     * 
+     */
+    public GetQuestionRequest createGetQuestionRequest() {
+        return new GetQuestionRequest();
+    }
+
+    /**
+     * Create an instance of {@link GetQuestionRequest2 }
+     * 
+     */
+    public GetQuestionRequest2 createGetQuestionRequest2() {
+        return new GetQuestionRequest2();
     }
 
     /**
@@ -77,35 +93,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetNbQuestionRequest }
+     * Create an instance of {@link GetThemesResponse }
      * 
      */
-    public GetNbQuestionRequest createGetNbQuestionRequest() {
-        return new GetNbQuestionRequest();
+    public GetThemesResponse createGetThemesResponse() {
+        return new GetThemesResponse();
     }
 
     /**
-     * Create an instance of {@link GetNbQuestionResponse }
+     * Create an instance of {@link Theme }
      * 
      */
-    public GetNbQuestionResponse createGetNbQuestionResponse() {
-        return new GetNbQuestionResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetQuestionRequest2 }
-     * 
-     */
-    public GetQuestionRequest2 createGetQuestionRequest2() {
-        return new GetQuestionRequest2();
-    }
-
-    /**
-     * Create an instance of {@link GetQuestionRequest }
-     * 
-     */
-    public GetQuestionRequest createGetQuestionRequest() {
-        return new GetQuestionRequest();
+    public Theme createTheme() {
+        return new Theme();
     }
 
     /**

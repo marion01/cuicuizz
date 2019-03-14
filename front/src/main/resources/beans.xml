@@ -3,7 +3,21 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-	<bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />
+	<bean
+		class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />
 
+	<bean id="IQuestionService"
+		class="fr.isima.cuicuiz.front.services.IQuestionService" />
+	<bean id="IQuestionClient"
+		class="fr.isima.cuicuizz.front.webservices.IQuestionClient" />
+
+	<bean id="ModeManagement"
+		class="fr.isima.cuicuizz.front.modeManagement" />
+	<bean id="QuestionManagement"
+		class="fr.isima.cuicuizz.front.QuestionManagement" />
+	<bean id="ThemeManagement"
+		class="fr.isima.cuicuizz.front.webservices.ThemeManagement" />
 		
+	<bean id="Game"
+		class="fr.isima.cuicuizz.front.Game" />
 </beans>

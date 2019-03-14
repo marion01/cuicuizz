@@ -3,7 +3,8 @@ package fr.isima.cuicuizz.front.mode;
 import java.io.IOException;
 import java.util.List;
 
-import fr.isima.cuicuizz.front.Main;
+import fr.isima.cuicuizz.front.Application;
+import fr.isima.cuicuizz.front.Game;
 import fr.isima.cuicuizz.front.Question;
 import fr.isima.cuicuizz.front.User;
 
@@ -24,18 +25,18 @@ public class Duel implements IMode{
 		
 		//first player
 		System.out.println("****** " + user.getPseudo() + ", your turn ******");
-		nbRightResponsePlayer1 = Main.answerQuestions(questions);
+		nbRightResponsePlayer1 = Application.game.getQuestionManagement().answerQuestions(questions);
 		System.out.println();
 		for (int i=0;i<10;i++) System.out.println();
 		
 		//second player
 		System.out.println("****** " + user.getPseudoSecondPlayer() + ", your turn ******");
-		nbRightResponsePlayer2 = Main.answerQuestions(questions);
+		nbRightResponsePlayer2 = Application.game.getQuestionManagement().answerQuestions(questions);
 		System.out.println();
 		for (int i=0;i<10;i++) System.out.println();
 		
 		displayResult(questions);
-		Main.menu();
+		Application.game.menu();
 		
 	}
 	
@@ -54,7 +55,7 @@ public class Duel implements IMode{
 		System.out.println(user.getPseudo() + " you have "+ nbRightResponsePlayer1 + " valid response");
 		System.out.println(user.getPseudoSecondPlayer() + " You have "+ nbRightResponsePlayer2 + " valid response");
 		try {
-			Main.visualizeCorrectResponse(questions);
+			Application.game.getQuestionManagement().visualizeCorrectResponse(questions);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -71,7 +72,7 @@ public class Duel implements IMode{
 		System.out.println("Enter the pseudo the second player:");
 		String pseudo;
 		try {
-			pseudo = Main.readEntry();
+			pseudo = Application.game.readEntry();
 			User user = User.getInstance();
 			user.setPseudoSecondPlayer(pseudo);
 			System.out.println();

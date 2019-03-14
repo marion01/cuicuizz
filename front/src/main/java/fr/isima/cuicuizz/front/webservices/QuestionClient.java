@@ -1,5 +1,6 @@
 package fr.isima.cuicuizz.front.webservices;
 
+import org.springframework.stereotype.Component;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 import org.springframework.ws.soap.client.core.SoapActionCallback;
 
@@ -10,6 +11,7 @@ import fr.isima.cuicuizz.front.GetQuestionResponse;
 import fr.isima.cuicuizz.front.GetThemesRequest;
 import fr.isima.cuicuizz.front.GetThemesResponse;
 
+@Component
 public class QuestionClient extends WebServiceGatewaySupport implements IQuestionClient {
 
 	@Override

@@ -1,4 +1,4 @@
-package fr.isima.services;
+package fr.isima.cuicuiz.front.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
