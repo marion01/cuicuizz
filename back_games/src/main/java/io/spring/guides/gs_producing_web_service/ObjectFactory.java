@@ -2,7 +2,7 @@
 // Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.7 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2019.03.13 à 06:45:36 PM CET 
+// Généré le : 2019.03.14 à 11:36:12 AM CET 
 //
 
 
@@ -37,6 +37,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetThemesResponse }
+     * 
+     */
+    public GetThemesResponse createGetThemesResponse() {
+        return new GetThemesResponse();
+    }
+
+    /**
+     * Create an instance of {@link Theme }
+     * 
+     */
+    public Theme createTheme() {
+        return new Theme();
+    }
+
+    /**
      * Create an instance of {@link GetQuestionResponse }
      * 
      */
@@ -53,6 +69,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetThemesRequest }
+     * 
+     */
+    public GetThemesRequest createGetThemesRequest() {
+        return new GetThemesRequest();
+    }
+
+    /**
      * Create an instance of {@link GetNbQuestionRequest }
      * 
      */
@@ -66,6 +90,14 @@ public class ObjectFactory {
      */
     public GetNbQuestionResponse createGetNbQuestionResponse() {
         return new GetNbQuestionResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetQuestionRequest2 }
+     * 
+     */
+    public GetQuestionRequest2 createGetQuestionRequest2() {
+        return new GetQuestionRequest2();
     }
 
     /**

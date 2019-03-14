@@ -1,6 +1,6 @@
 package fr.isima.cuicuizz.model;
 
-public class Theme {
+public class ThemeModel {
 	private int id;
 	private String name;
 	

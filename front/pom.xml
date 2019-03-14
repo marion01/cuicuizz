@@ -64,6 +64,9 @@
                         <schema>
                             <url>http://localhost:8080/ws/nbQuestions.wsdl</url>
                         </schema>
+                        <schema>
+                            <url>http://localhost:8080/ws/themes.wsdl</url>
+                        </schema>
                     </schemas>
                 </configuration>
             </plugin>

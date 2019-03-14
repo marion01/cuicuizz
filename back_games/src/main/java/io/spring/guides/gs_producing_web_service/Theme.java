@@ -15,18 +15,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java pour answer complex type.
+ * <p>Classe Java pour Theme complex type.
  * 
  * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
  * 
  * <pre>
- * &lt;complexType name="answer">
+ * &lt;complexType name="Theme">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="answer" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="isCorrect" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
+ *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,17 +35,15 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "answer", propOrder = {
+@XmlType(name = "Theme", propOrder = {
     "id",
-    "answer",
-    "isCorrect"
+    "name"
 })
-public class Answer {
+public class Theme {
 
     protected int id;
     @XmlElement(required = true)
-    protected String answer;
-    protected boolean isCorrect;
+    protected String name;
 
     /**
      * Obtient la valeur de la propriété id.
@@ -65,43 +62,27 @@ public class Answer {
     }
 
     /**
-     * Obtient la valeur de la propriété answer.
+     * Obtient la valeur de la propriété name.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getAnswer() {
-        return answer;
+    public String getName() {
+        return name;
     }
 
     /**
-     * Définit la valeur de la propriété answer.
+     * Définit la valeur de la propriété name.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setAnswer(String value) {
-        this.answer = value;
-    }
-
-    /**
-     * Obtient la valeur de la propriété isCorrect.
-     * 
-     */
-    public boolean isIsCorrect() {
-        return isCorrect;
-    }
-
-    /**
-     * Définit la valeur de la propriété isCorrect.
-     * 
-     */
-    public void setIsCorrect(boolean value) {
-        this.isCorrect = value;
+    public void setName(String value) {
+        this.name = value;
     }
 
 }

@@ -9,6 +9,15 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+    
+    <xs:element name="getQuestionRequest2">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="themeId" type="xs:int"/>
+                <xs:element name="nbQuestions" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 
     <xs:element name="getQuestionResponse">
         <xs:complexType>

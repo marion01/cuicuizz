@@ -24,6 +24,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element name="themeId" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="nbQuestions" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -35,12 +36,30 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
+    "themeId",
     "nbQuestions"
 })
-@XmlRootElement(name = "getNbQuestionResponse")
-public class GetNbQuestionResponse {
+@XmlRootElement(name = "getQuestionRequest2")
+public class GetQuestionRequest2 {
 
+    protected int themeId;
     protected int nbQuestions;
+
+    /**
+     * Obtient la valeur de la propriété themeId.
+     * 
+     */
+    public int getThemeId() {
+        return themeId;
+    }
+
+    /**
+     * Définit la valeur de la propriété themeId.
+     * 
+     */
+    public void setThemeId(int value) {
+        this.themeId = value;
+    }
 
     /**
      * Obtient la valeur de la propriété nbQuestions.

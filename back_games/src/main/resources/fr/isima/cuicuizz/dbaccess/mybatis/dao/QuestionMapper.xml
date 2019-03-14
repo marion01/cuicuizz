@@ -36,5 +36,9 @@
 		SELECT COUNT (1) FROM Question where ThemeId=#{themeId}; 
 	</select>
 
+
+	<select id="getThemes">
+		SELECT * FROM Theme
+	</select>
 </mapper>
 

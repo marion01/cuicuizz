@@ -6,15 +6,24 @@ import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import fr.isima.cuicuizz.front.mode.ModeEnum;
+import fr.isima.services.IQuestionService;
 
 public class Main {
+
+	@Autowired
+	static IQuestionService questionService;
 
 	private Main() {
 	}
 
 	private static BufferedReader entry = new BufferedReader(new InputStreamReader(System.in));
 
+	@PostConstruct
 	public static void launch() throws IOException {
 		System.out.println("************* Welcome to cuicuizz !! :) *************\n");
 		System.out.println("Enter your pseudo:");
@@ -109,13 +118,17 @@ public class Main {
 
 		final int themeId = chooseTheme();
 		final int nb = getNumberQuestions();
-		final GetQuestionResponse response = Application.questionClient.getQuestion(themeId, nb);
+		final GetQuestionResponse response = Main.questionService.getQuestion(themeId, nb);
+		// final GetQuestionResponse response = questionService.getQuestion(themeId,
+		// nb);
 
 		return response.getQuestions();
 	}
 
 	public static int getNumberQuestions() {
-		final int nbMax = Application.questionClient.getNbQuestionsFromTheme(1).getNbQuestions();
+		// final int nbMax =
+		// questionService.getNbQuestionsFromTheme(1).getNbQuestions();
+		final int nbMax = Main.questionService.getNbQuestionsFromTheme(1).getNbQuestions();
 
 		boolean tooManyQuestion = true;
 		System.out.println("Choose the number of questions:");
