@@ -31,8 +31,8 @@ public class ModeManagement implements IManagement {
 		}
 		System.out.println(ModeEnum.values().length + ".Back");
 		System.out.println("Enter the number of the mode:");
-		final String i = Utils.readEntry();
-		return Integer.parseInt(i);
+		final int i = Utils.readEntryNumber();
+		return i;
 	}
 
 	@Override

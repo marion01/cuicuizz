@@ -40,7 +40,7 @@ public class Game {
 
 	public void begin() throws IOException {
 		System.out.println("Enter your pseudo:");
-		final String pseudo = Utils.readEntry();
+		final String pseudo = Utils.readEntryString();
 		final User user = User.getInstance();
 		user.setPseudo(pseudo);
 		System.out.println();
@@ -59,12 +59,12 @@ public class Game {
 		System.out.println("0.Show history");
 		System.out.println("1.New game");
 
-		final String i = Utils.readEntry();
-		switch ((i != null) ? i : "-1") {
-		case ("0"):
+		final int i = Utils.readEntryNumber();
+		switch (i) {
+		case (0):
 			System.out.println("history");
 			break;
-		case ("1"):
+		case (1):
 			int idMode = modeManagement.handling();
 			if (idMode != ModeEnum.values().length) {
 				final ModeEnum mode = ModeEnum.getById(idMode);

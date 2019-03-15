@@ -47,11 +47,9 @@ public class ThemeManagement implements IManagement{
 		for (int i = 0; i < themes.size(); i++) {
 			System.out.println(i + "." + themes.get(i).getName());
 		}
-		String theme;
 		int themeId = -1;
 		try {
-			theme = Utils.readEntry();
-			themeId = Integer.parseInt(theme);
+			themeId = Utils.readEntryNumber();
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}

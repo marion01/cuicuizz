@@ -75,7 +75,7 @@ public class Duel implements IMode{
 		System.out.println("Enter the pseudo the second player:");
 		String pseudo;
 		try {
-			pseudo = Utils.readEntry();
+			pseudo = Utils.readEntryString();
 			User user = User.getInstance();
 			user.setPseudoSecondPlayer(pseudo);
 			System.out.println();

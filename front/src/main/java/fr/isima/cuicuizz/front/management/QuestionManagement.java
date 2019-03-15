@@ -21,17 +21,17 @@ public class QuestionManagement {
 		for (int i = 0; i < answers.size(); i++) {
 			System.out.println(i + "." + answers.get(i).getAnswer());
 		}
-		String i = null;
+		int i = 0;
 		boolean wrongAnswer = true;
 		while (wrongAnswer) {
-			i = Utils.readEntry();
+			i = Utils.readEntryNumber();
 			wrongAnswer = false;
-			if (Integer.parseInt(i) >= answers.size()) {
+			if (i >= answers.size()) {
 				System.out.println("incorrect response");
 				wrongAnswer = true;
 			}
 		}
-		if (answers.get(Integer.parseInt(i)).isIsCorrect())
+		if (answers.get(i).isIsCorrect())
 			return true;
 		return false;
 	}
@@ -72,12 +72,10 @@ public class QuestionManagement {
 	public int getNumberQuestions(int nbMax) {
 		boolean tooManyQuestion = true;
 		System.out.println("Choose the number of questions:");
-		String nbQuestion;
 		int nb = 0;
 		while (tooManyQuestion) {
 			try {
-				nbQuestion = Utils.readEntry();
-				nb = Integer.parseInt(nbQuestion);
+				nb = Utils.readEntryNumber();
 				tooManyQuestion = false;
 				if (nb > nbMax) {
 					tooManyQuestion = true;
