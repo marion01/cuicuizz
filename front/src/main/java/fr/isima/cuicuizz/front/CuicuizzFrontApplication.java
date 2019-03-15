@@ -10,13 +10,13 @@ import org.springframework.context.annotation.Bean;
 import fr.isima.cuicuizz.front.webservices.QuestionClient;
 
 @SpringBootApplication
-public class Application {
+public class CuicuizzFrontApplication {
 
 	public static void main(String[] args) {
 		// disable auto restart
 		System.setProperty("spring.devtools.restart.enabled", "false");
 
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(CuicuizzFrontApplication.class, args);
 
 		try {
 			Main.launch();

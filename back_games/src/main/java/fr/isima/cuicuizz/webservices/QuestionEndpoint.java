@@ -55,7 +55,7 @@ public class QuestionEndpoint {
 	@ResponsePayload
 	public GetThemesResponse getThemes(@RequestPayload GetThemesRequest request) {
 		final GetThemesResponse response = new GetThemesResponse();
-		response.getQuestions().addAll(questionService.getThemes());
+		response.getThemes().addAll(questionService.getThemes());
 		return response;
 	}
 

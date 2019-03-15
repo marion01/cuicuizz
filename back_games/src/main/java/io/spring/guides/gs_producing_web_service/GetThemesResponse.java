@@ -2,7 +2,7 @@
 // Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.7 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2019.03.14 à 11:36:12 AM CET 
+// Généré le : 2019.03.15 à 05:41:42 PM CET 
 //
 
 
@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="questions" type="{http://spring.io/guides/gs-producing-web-service}Theme" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="themes" type="{http://spring.io/guides/gs-producing-web-service}Theme" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -37,26 +37,26 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "questions"
+    "themes"
 })
 @XmlRootElement(name = "getThemesResponse")
 public class GetThemesResponse {
 
-    protected List<Theme> questions;
+    protected List<Theme> themes;
 
     /**
-     * Gets the value of the questions property.
+     * Gets the value of the themes property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the questions property.
+     * This is why there is not a <CODE>set</CODE> method for the themes property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getQuestions().add(newItem);
+     *    getThemes().add(newItem);
      * </pre>
      * 
      * 
@@ -66,11 +66,11 @@ public class GetThemesResponse {
      * 
      * 
      */
-    public List<Theme> getQuestions() {
-        if (questions == null) {
-            questions = new ArrayList<Theme>();
+    public List<Theme> getThemes() {
+        if (themes == null) {
+            themes = new ArrayList<Theme>();
         }
-        return this.questions;
+        return this.themes;
     }
 
 }
