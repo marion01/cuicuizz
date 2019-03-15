@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import fr.isima.cuicuizz.front.Question;
+import fr.isima.cuicuizz.front.management.QuestionManagement;
 
 public interface IMode {
 
@@ -11,7 +12,7 @@ public interface IMode {
 	 * Execute the correct mode
 	 * @throws IOException 
 	 */
-	public void execute(List<Question> questions) throws IOException;
+	public void execute(List<Question> questions, QuestionManagement qm) throws IOException;
 
 	public static IMode getInstance() {
 		return null;}

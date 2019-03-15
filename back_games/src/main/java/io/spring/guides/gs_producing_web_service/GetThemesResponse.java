@@ -1,8 +1,8 @@
 //
-// Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.7 
-// Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
+// Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.3.0 
+// Voir <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2019.03.15 à 05:41:42 PM CET 
+// Généré le : 2019.03.15 à 05:57:29 PM CET 
 //
 
 
@@ -22,41 +22,41 @@ import javax.xml.bind.annotation.XmlType;
  * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
  * 
  * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="themes" type="{http://spring.io/guides/gs-producing-web-service}Theme" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="questions" type="{http://spring.io/guides/gs-producing-web-service}Theme" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "themes"
+    "questions"
 })
 @XmlRootElement(name = "getThemesResponse")
 public class GetThemesResponse {
 
-    protected List<Theme> themes;
+    protected List<Theme> questions;
 
     /**
-     * Gets the value of the themes property.
+     * Gets the value of the questions property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the themes property.
+     * This is why there is not a <CODE>set</CODE> method for the questions property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getThemes().add(newItem);
+     *    getQuestions().add(newItem);
      * </pre>
      * 
      * 
@@ -66,11 +66,11 @@ public class GetThemesResponse {
      * 
      * 
      */
-    public List<Theme> getThemes() {
-        if (themes == null) {
-            themes = new ArrayList<Theme>();
+    public List<Theme> getQuestions() {
+        if (questions == null) {
+            questions = new ArrayList<Theme>();
         }
-        return this.themes;
+        return this.questions;
     }
 
 }

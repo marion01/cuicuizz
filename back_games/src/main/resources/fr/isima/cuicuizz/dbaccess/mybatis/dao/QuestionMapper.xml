@@ -37,7 +37,7 @@
 	</select>
 
 
-	<select id="getThemes">
+	<select id="getThemes" resultType="ThemeModel">
 		SELECT * FROM Theme
 	</select>
 </mapper>

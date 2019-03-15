@@ -3,9 +3,12 @@ package fr.isima.cuicuizz.front.mode;
 import java.io.IOException;
 import java.util.List;
 
-import fr.isima.cuicuizz.front.Main;
+import fr.isima.cuicuizz.front.Application;
+import fr.isima.cuicuizz.front.Game;
 import fr.isima.cuicuizz.front.Question;
 import fr.isima.cuicuizz.front.User;
+import fr.isima.cuicuizz.front.Utils;
+import fr.isima.cuicuizz.front.management.QuestionManagement;
 
 public class Duel implements IMode{
 	
@@ -14,9 +17,12 @@ public class Duel implements IMode{
 	int nbRightResponsePlayer1;
 	int nbRightResponsePlayer2;
 	User user;
+	
+	QuestionManagement questionManagement;
 
 	@Override
-	public void execute(List<Question> questions) throws IOException {
+	public void execute(List<Question> questions, QuestionManagement qm) throws IOException {
+		this.questionManagement = qm;
 		System.out.println("Duel mode");
 		getPseudoSecondPlayer();
 		user = User.getInstance();
@@ -24,19 +30,17 @@ public class Duel implements IMode{
 		
 		//first player
 		System.out.println("****** " + user.getPseudo() + ", your turn ******");
-		nbRightResponsePlayer1 = Main.answerQuestions(questions);
+		nbRightResponsePlayer1 = questionManagement.answerQuestions(questions);
 		System.out.println();
 		for (int i=0;i<10;i++) System.out.println();
 		
 		//second player
 		System.out.println("****** " + user.getPseudoSecondPlayer() + ", your turn ******");
-		nbRightResponsePlayer2 = Main.answerQuestions(questions);
+		nbRightResponsePlayer2 = questionManagement.answerQuestions(questions);
 		System.out.println();
 		for (int i=0;i<10;i++) System.out.println();
 		
-		displayResult(questions);
-		Main.menu();
-		
+		displayResult(questions);		
 	}
 	
 	
@@ -54,7 +58,7 @@ public class Duel implements IMode{
 		System.out.println(user.getPseudo() + " you have "+ nbRightResponsePlayer1 + " valid response");
 		System.out.println(user.getPseudoSecondPlayer() + " You have "+ nbRightResponsePlayer2 + " valid response");
 		try {
-			Main.visualizeCorrectResponse(questions);
+			questionManagement.visualizeCorrectResponse(questions);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -71,7 +75,7 @@ public class Duel implements IMode{
 		System.out.println("Enter the pseudo the second player:");
 		String pseudo;
 		try {
-			pseudo = Main.readEntry();
+			pseudo = Utils.readEntryString();
 			User user = User.getInstance();
 			user.setPseudoSecondPlayer(pseudo);
 			System.out.println();
