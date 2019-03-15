@@ -19,7 +19,7 @@ public class QuestionClient extends WebServiceGatewaySupport implements IQuestio
 		final GetQuestionRequest request = new GetQuestionRequest();
 		request.setThemeId(id);
 		request.setNbQuestions(nbQuestions);
-		return (GetQuestionResponse) getWebServiceTemplate().marshalSendAndReceive("http://localhost:8080/ws/questions",
+		return (GetQuestionResponse) getWebServiceTemplate().marshalSendAndReceive("http://localhost:8000/ws/questions",
 				request, new SoapActionCallback("http://spring.io/guides/gs-producing-web-service/GetQuestionRequest"));
 	}
 
@@ -28,14 +28,14 @@ public class QuestionClient extends WebServiceGatewaySupport implements IQuestio
 		final GetNbQuestionRequest request = new GetNbQuestionRequest();
 		request.setThemeId(themeId);
 		return (GetNbQuestionResponse) getWebServiceTemplate().marshalSendAndReceive(
-				"http://localhost:8080/ws/nbQuestions", request,
+				"http://localhost:8000/ws/nbQuestions", request,
 				new SoapActionCallback("http://spring.io/guides/gs-producing-web-service/GetNbQuestionRequest"));
 	}
 
 	@Override
 	public GetThemesResponse getThemes() {
 		final GetThemesRequest request = new GetThemesRequest();
-		GetThemesResponse response =(GetThemesResponse) getWebServiceTemplate().marshalSendAndReceive("http://localhost:8080/ws/themes",
+		GetThemesResponse response =(GetThemesResponse) getWebServiceTemplate().marshalSendAndReceive("http://localhost:8000/ws/themes",
 				request, new SoapActionCallback("http://spring.io/guides/gs-producing-web-service/getThemesRequest"));
 		return response;
 	}

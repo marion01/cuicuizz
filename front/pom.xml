@@ -70,13 +70,13 @@
 					<generatePackage>fr.isima.cuicuizz.front</generatePackage>
 					<schemas>
 						<schema>
-							<url>http://localhost:8080/ws/questions.wsdl</url>
+							<url>http://localhost:8000/ws/questions.wsdl</url>
 						</schema>
 						<schema>
-							<url>http://localhost:8080/ws/nbQuestions.wsdl</url>
+							<url>http://localhost:8000/ws/nbQuestions.wsdl</url>
 						</schema>
 						<schema>
-							<url>http://localhost:8080/ws/themes.wsdl</url>
+							<url>http://localhost:8000/ws/themes.wsdl</url>
 						</schema>
 					</schemas>
 				</configuration>

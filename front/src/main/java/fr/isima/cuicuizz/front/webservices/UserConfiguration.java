@@ -5,8 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 
 @Configuration
-public class QuestionConfiguration {
-
+public class UserConfiguration {
 	@Bean
 	public Jaxb2Marshaller marshaller() {
 		final Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
@@ -17,9 +16,9 @@ public class QuestionConfiguration {
 	}
 	
 	@Bean
-	public QuestionClient questionClient(Jaxb2Marshaller marshaller) {
-		final QuestionClient client = new QuestionClient();
-		client.setDefaultUri("http://localhost:8000/ws");
+	public UserClient userClient(Jaxb2Marshaller marshaller) {
+		final UserClient client = new UserClient();
+		client.setDefaultUri("http://localhost:9000/ws");
 		client.setMarshaller(marshaller);
 		client.setUnmarshaller(marshaller);
 		return client;

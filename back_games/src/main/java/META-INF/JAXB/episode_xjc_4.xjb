@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bindings version="2.1" xmlns="http://java.sun.com/xml/ns/jaxb">
+  <!--
+
+Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.3.0 
+Voir <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
+Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
+Généré le : 2019.03.15 à 05:17:41 PM CET 
+
+  -->
+  <bindings scd="x-schema::tns" xmlns:tns="http://spring.io/guides/gs-producing-web-service">
+    <schemaBindings map="false">
+      <package name="io.spring.guides.gs_producing_web_service"/>
+    </schemaBindings>
+    <bindings scd="tns:getNbQuestionRequest">
+      <class ref="io.spring.guides.gs_producing_web_service.GetNbQuestionRequest"/>
+    </bindings>
+    <bindings scd="tns:getNbQuestionResponse">
+      <class ref="io.spring.guides.gs_producing_web_service.GetNbQuestionResponse"/>
+    </bindings>
+    <bindings scd="tns:getQuestionRequest">
+      <class ref="io.spring.guides.gs_producing_web_service.GetQuestionRequest"/>
+    </bindings>
+    <bindings scd="tns:getQuestionRequest2">
+      <class ref="io.spring.guides.gs_producing_web_service.GetQuestionRequest2"/>
+    </bindings>
+    <bindings scd="tns:getQuestionResponse">
+      <class ref="io.spring.guides.gs_producing_web_service.GetQuestionResponse"/>
+    </bindings>
+    <bindings scd="~tns:question">
+      <class ref="io.spring.guides.gs_producing_web_service.Question"/>
+    </bindings>
+    <bindings scd="tns:getThemesRequest">
+      <class ref="io.spring.guides.gs_producing_web_service.GetThemesRequest"/>
+    </bindings>
+    <bindings scd="tns:getThemesResponse">
+      <class ref="io.spring.guides.gs_producing_web_service.GetThemesResponse"/>
+    </bindings>
+    <bindings scd="~tns:Theme">
+      <class ref="io.spring.guides.gs_producing_web_service.Theme"/>
+    </bindings>
+    <bindings scd="~tns:answer">
+      <class ref="io.spring.guides.gs_producing_web_service.Answer"/>
+    </bindings>
+  </bindings>
+</bindings>
+
