@@ -83,7 +83,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jaxb2-maven-plugin</artifactId>
-				<version>2.4</version>
+				<version>1.6</version>
 				<executions>
 					<execution>
 						<id>xjc</id>
@@ -93,9 +93,10 @@
 					</execution>
 				</executions>
 				<configuration>
-					<schemaDirectory>${project.basedir}/src/main/resources/</schemaDirectory>
+					<schemaDirectory>${project.basedir}/src/main/resources/xsd/</schemaDirectory>
+					<schemaFiles>*.xsd</schemaFiles>
 					<outputDirectory>${project.basedir}/src/main/java</outputDirectory>
-					<clearOutputDir>false</clearOutputDir>
+					<clearOutputDir>true</clearOutputDir>
 				</configuration>
 			</plugin>
 		</plugins>

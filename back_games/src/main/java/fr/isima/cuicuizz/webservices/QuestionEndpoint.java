@@ -10,7 +10,6 @@ import fr.isima.cuicuizz.services.interfaces.IQuestionService;
 import io.spring.guides.gs_producing_web_service.GetNbQuestionRequest;
 import io.spring.guides.gs_producing_web_service.GetNbQuestionResponse;
 import io.spring.guides.gs_producing_web_service.GetQuestionRequest;
-import io.spring.guides.gs_producing_web_service.GetQuestionRequest2;
 import io.spring.guides.gs_producing_web_service.GetQuestionResponse;
 import io.spring.guides.gs_producing_web_service.GetThemesRequest;
 import io.spring.guides.gs_producing_web_service.GetThemesResponse;
@@ -27,15 +26,6 @@ public class QuestionEndpoint {
 	public GetQuestionResponse getQuestions(@RequestPayload GetQuestionRequest request) {
 		final GetQuestionResponse response = new GetQuestionResponse();
 		System.out.println("test");
-		response.getQuestions().addAll(questionService.findQuestion(request.getThemeId(), request.getNbQuestions()));
-		return response;
-	}
-
-	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getQuestionRequest2")
-	@ResponsePayload
-	public GetQuestionResponse getQuestions2(@RequestPayload GetQuestionRequest2 request) {
-		final GetQuestionResponse response = new GetQuestionResponse();
-		System.out.println("blabla");
 		response.getQuestions().addAll(questionService.findQuestion(request.getThemeId(), request.getNbQuestions()));
 		return response;
 	}
