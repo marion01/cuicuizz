@@ -1,4 +1,4 @@
-package fr.isima.cuicuiz.front.services;
+package fr.isima.cuicuizz.front.services;
 
 import fr.isima.cuicuizz.front.GetNbQuestionResponse;
 import fr.isima.cuicuizz.front.GetQuestionResponse;

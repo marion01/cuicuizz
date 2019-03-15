@@ -1,50 +1,30 @@
-package fr.isima.cuicuizz.front;
+package fr.isima.cuicuizz.front.management;
 
 import java.io.IOException;
 import java.util.List;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
-@Controller
+import fr.isima.cuicuizz.front.Answer;
+import fr.isima.cuicuizz.front.Question;
+import fr.isima.cuicuizz.front.Utils;
+
+@Component
+@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class QuestionManagement {
-	
-	public int getNumberQuestions() {
-		// final int nbMax =
-		// questionService.getNbQuestionsFromTheme(1).getNbQuestions();
-		final int nbMax = Application.game.getQuestionService().getNbQuestionsFromTheme(1).getNbQuestions();
-
-		boolean tooManyQuestion = true;
-		System.out.println("Choose the number of questions:");
-		String nbQuestion;
-		int nb = 0;
-		while (tooManyQuestion) {
-			try {
-				nbQuestion = Application.game.readEntry();
-				nb = Integer.parseInt(nbQuestion);
-				tooManyQuestion = false;
-				if (nb > nbMax) {
-					tooManyQuestion = true;
-					System.out.println("There are not enough questions, choose less question");
-				}
-			} catch (final IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return nb;
-	}
-	
+		
 	public boolean displayQuestion(Question q) throws IOException {
 		System.out.println(q.getValue());
 		final List<Answer> answers = q.getAnswers();
-		System.out.println(answers.size());
 		for (int i = 0; i < answers.size(); i++) {
 			System.out.println(i + "." + answers.get(i).getAnswer());
 		}
 		String i = null;
 		boolean wrongAnswer = true;
 		while (wrongAnswer) {
-			i = Application.game.readEntry();
+			i = Utils.readEntry();
 			wrongAnswer = false;
 			if (Integer.parseInt(i) >= answers.size()) {
 				System.out.println("incorrect response");
@@ -87,6 +67,28 @@ public class QuestionManagement {
 			e.printStackTrace();
 		}
 		return nbTrue;
+	}
+	
+	public int getNumberQuestions(int nbMax) {
+		boolean tooManyQuestion = true;
+		System.out.println("Choose the number of questions:");
+		String nbQuestion;
+		int nb = 0;
+		while (tooManyQuestion) {
+			try {
+				nbQuestion = Utils.readEntry();
+				nb = Integer.parseInt(nbQuestion);
+				tooManyQuestion = false;
+				if (nb > nbMax) {
+					tooManyQuestion = true;
+					System.out.println("There are not enough questions, choose less question");
+				}
+			} catch (final IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return nb;
 	}
 
 }
