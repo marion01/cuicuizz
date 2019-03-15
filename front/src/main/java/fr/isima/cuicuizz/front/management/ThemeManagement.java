@@ -6,22 +6,28 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 
+import fr.isima.cuicuizz.front.GetThemesResponse;
+import fr.isima.cuicuizz.front.Theme;
 import fr.isima.cuicuizz.front.Utils;
+import fr.isima.cuicuizz.front.services.IQuestionService;
 
 @Controller
 @Qualifier("ThemeManagement")
 public class ThemeManagement implements IManagement{
 
-	private List<String> theme;
+	private List<Theme> themes;
+	
+	@Autowired
+	private IQuestionService questionService;
 	
 	@PostConstruct
 	public void getTheme() {
-		theme = new ArrayList<String>();
-		// to recover in db
-		theme.add("General");
+		GetThemesResponse tr = questionService.getThemes();
+		themes = tr.getQuestions();
 	}
 	
 	@Override
@@ -36,17 +42,13 @@ public class ThemeManagement implements IManagement{
 	}
 
 	@Override
-	public int choose() {
-		//to remove after
-		theme = new ArrayList<String>();
-		theme.add("General");
-		
+	public int choose() {		
 		System.out.println("Choose the theme of the question:");
-		for (int i = 0; i < theme.size(); i++) {
-			System.out.println(i + "." + theme.get(i));
+		for (int i = 0; i < themes.size(); i++) {
+			System.out.println(i + "." + themes.get(i).getName());
 		}
 		String theme;
-		int themeId;
+		int themeId = -1;
 		try {
 			theme = Utils.readEntry();
 			themeId = Integer.parseInt(theme);
@@ -55,14 +57,14 @@ public class ThemeManagement implements IManagement{
 		}
 
 		// recup vrai theme
-		themeId = 1;
-		return themeId;
+	//	themeId = 1;
+		return themeId + 1;
 	}
 	
 	@Override
 	public boolean handlingEntry(int idTheme) throws IOException {
 		boolean correctEntry = false;
-		if (idTheme <= theme.size()) {
+		if (idTheme <= themes.size()) {
 			correctEntry = true;
 		} else {
 			System.out.println("incorrect entry");

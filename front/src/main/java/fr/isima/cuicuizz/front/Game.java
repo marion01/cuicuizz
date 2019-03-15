@@ -13,9 +13,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import fr.isima.cuicuizz.front.management.IManagement;
-import fr.isima.cuicuizz.front.management.ModeManagement;
 import fr.isima.cuicuizz.front.management.QuestionManagement;
-import fr.isima.cuicuizz.front.management.ThemeManagement;
 import fr.isima.cuicuizz.front.mode.ModeEnum;
 import fr.isima.cuicuizz.front.services.IQuestionService;
 
@@ -37,24 +35,10 @@ public class Game {
 	@Qualifier("ThemeManagement")
 	private IManagement themeManagement;
 
-	public IQuestionService getQuestionService() {
-		return questionService;
-	}
-
-	/*
-	 * public IManagement getModeManagement() { return modeManagement; }
-	 * 
-	 * public IManagement getThemeManagement() { return themeManagement; }
-	 * 
-	 * public QuestionManagement getQuestionManagement() { return
-	 * questionManagement; }
-	 */
-
 	private Game() {
 	}
 
 	public void begin() throws IOException {
-
 		System.out.println("Enter your pseudo:");
 		final String pseudo = Utils.readEntry();
 		final User user = User.getInstance();
@@ -107,8 +91,6 @@ public class Game {
 		final int nbMax = questionService.getNbQuestionsFromTheme(1).getNbQuestions();
 		final int nb = questionManagement.getNumberQuestions(nbMax);
 		final GetQuestionResponse response = questionService.getQuestion(themeId, nb);
-		// final GetQuestionResponse response = questionService.getQuestion(themeId,
-		// nb);
 
 		return response.getQuestions();
 	}

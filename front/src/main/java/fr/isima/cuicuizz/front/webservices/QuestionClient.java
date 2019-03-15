@@ -35,8 +35,9 @@ public class QuestionClient extends WebServiceGatewaySupport implements IQuestio
 	@Override
 	public GetThemesResponse getThemes() {
 		final GetThemesRequest request = new GetThemesRequest();
-		return (GetThemesResponse) getWebServiceTemplate().marshalSendAndReceive("http://localhost:8080/ws/themes",
-				request, new SoapActionCallback("http://spring.io/guides/gs-producing-web-service/GetThemesRequest"));
+		GetThemesResponse response =(GetThemesResponse) getWebServiceTemplate().marshalSendAndReceive("http://localhost:8080/ws/themes",
+				request, new SoapActionCallback("http://spring.io/guides/gs-producing-web-service/getThemesRequest"));
+		return response;
 	}
 
 }
