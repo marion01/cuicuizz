@@ -78,6 +78,12 @@
 						<schema>
 							<url>http://localhost:8000/ws/themes.wsdl</url>
 						</schema>
+						<schema>
+							<url>http://localhost:9000/ws/users.wsdl</url>
+						</schema>
+						<schema>
+							<url>http://localhost:9000/ws/scores.wsdl</url>
+						</schema>
 					</schemas>
 				</configuration>
 			</plugin>

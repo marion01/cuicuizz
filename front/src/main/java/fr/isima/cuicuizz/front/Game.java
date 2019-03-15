@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import fr.isima.cuicuizz.front.management.IManagement;
 import fr.isima.cuicuizz.front.management.QuestionManagement;
+import fr.isima.cuicuizz.front.management.ScoreManagement;
 import fr.isima.cuicuizz.front.mode.ModeEnum;
 import fr.isima.cuicuizz.front.services.IQuestionService;
 
@@ -35,6 +36,9 @@ public class Game {
 	@Qualifier("ThemeManagement")
 	private IManagement themeManagement;
 
+	@Autowired
+	private ScoreManagement scoreManagement;
+	
 	private Game() {
 	}
 
@@ -62,7 +66,8 @@ public class Game {
 		final int i = Utils.readEntryNumber();
 		switch (i) {
 		case (0):
-			System.out.println("history");
+			int choice = scoreManagement.choose();
+			scoreManagement.handleChoice(choice);
 			break;
 		case (1):
 			int idMode = modeManagement.handling();
@@ -76,12 +81,11 @@ public class Game {
 					e.printStackTrace();
 				}
 			}
-			menu();
 			break;
 		default:
 			System.out.println("incorrect entry");
-			menu();
 		}
+		menu();
 		System.out.println();
 	}
 

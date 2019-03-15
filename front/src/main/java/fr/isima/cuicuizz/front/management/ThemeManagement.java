@@ -53,9 +53,6 @@ public class ThemeManagement implements IManagement{
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}
-
-		// recup vrai theme
-	//	themeId = 1;
 		return themeId + 1;
 	}
 	
