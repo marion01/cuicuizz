@@ -7,7 +7,8 @@ public class Score {
 	private String mode;
 	private String theme;
 	private int nbQuestions;
-	private double value;
+	private int nbSuccess;
+	private String value;
 	
 	public int getId() {
 		return id;
@@ -39,11 +40,17 @@ public class Score {
 	public void setNbQuestions(int nbQuestions) {
 		this.nbQuestions = nbQuestions;
 	}
-	public double getValue() {
+	public String getValue() {
 		return value;
 	}
-	public void setValue(double value) {
+	public void setValue(String value) {
 		this.value = value;
+	}
+	public int getNbSuccess() {
+		return nbSuccess;
+	}
+	public void setNbSuccess(int nbSuccess) {
+		this.nbSuccess = nbSuccess;
 	}
 
 }

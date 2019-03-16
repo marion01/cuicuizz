@@ -29,7 +29,8 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="mode" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="theme" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="nbQuestions" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="value" type="{http://www.w3.org/2001/XMLSchema}double"/>
+ *         &lt;element name="nbSuccess" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="value" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -45,6 +46,7 @@ import javax.xml.bind.annotation.XmlType;
     "mode",
     "theme",
     "nbQuestions",
+    "nbSuccess",
     "value"
 })
 public class ScoreDto {
@@ -56,7 +58,8 @@ public class ScoreDto {
     @XmlElement(required = true)
     protected String theme;
     protected int nbQuestions;
-    protected double value;
+    private int nbSuccess;
+    protected String value;
 
     /**
      * Obtient la valeur de la propriété id.
@@ -158,7 +161,7 @@ public class ScoreDto {
      * Obtient la valeur de la propriété value.
      * 
      */
-    public double getValue() {
+    public String getValue() {
         return value;
     }
 
@@ -166,8 +169,24 @@ public class ScoreDto {
      * Définit la valeur de la propriété value.
      * 
      */
-    public void setValue(double value) {
+    public void setValue(String value) {
         this.value = value;
+    }
+    
+    /**
+     * Obtient la valeur de la propriété nbSuccess.
+     * 
+     */
+    public int getNbSuccess() {
+        return nbSuccess;
+    }
+
+    /**
+     * Définit la valeur de la propriété nbSuccess.
+     * 
+     */
+    public void setNbSuccess(int nbSuccess) {
+        this.nbSuccess = nbSuccess;
     }
 
 }

@@ -12,14 +12,101 @@
 		</xs:complexType>
 	</xs:element>
 	
-		<xs:complexType name="scoreDto">
+	<xs:element name="scoreResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="scores" type="tns:scoreDto"
+					minOccurs="0" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="addScore">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="score" type="tns:scoreDto" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="getUserScores">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="user" type="tns:userDto" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="getUserModeThemeScore">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="user" type="tns:userDto" />
+				<xs:element name="mode" type="xs:string" />
+				<xs:element name="theme" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="getUserModeScores">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="user" type="tns:userDto" />
+				<xs:element name="mode" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="getUserThemeScores">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="user" type="tns:userDto" />
+				<xs:element name="theme" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="getAllScores">
+		<xs:complexType>
+			<xs:sequence>
+
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="getAllThemesScores">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="theme" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="getAllModesScores">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="mode" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:complexType name="scoreDto">
 		<xs:sequence>
 			<xs:element name="id" type="xs:int" />
 			<xs:element name="userId" type="xs:int" />
 			<xs:element name="mode" type="xs:string" />
 			<xs:element name="theme" type="xs:string" />
 			<xs:element name="nbQuestions" type="xs:int" />
-			<xs:element name="value" type="xs:double" />
+			<xs:element name="nbSuccess" type="xs:int" />
+			<xs:element name="value" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="userDto">
+		<xs:sequence>
+			<xs:element name="id" type="xs:int" />
+			<xs:element name="pseudo" type="xs:string" />
+			<xs:element name="password" type="xs:string" />
 		</xs:sequence>
 	</xs:complexType>
 	

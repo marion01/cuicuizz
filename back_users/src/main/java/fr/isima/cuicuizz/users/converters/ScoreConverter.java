@@ -11,6 +11,8 @@ public class ScoreConverter {
 		entity.setMode(dto.getMode());
 		entity.setTheme(dto.getTheme());
 		entity.setUserId(dto.getUserId());
+		entity.setNbQuestions(dto.getNbQuestions());
+		entity.setNbSuccess(dto.getNbSuccess());
 		entity.setValue(dto.getValue());		
 		return entity;		
 	}
@@ -21,6 +23,8 @@ public class ScoreConverter {
 		dto.setTheme(entity.getTheme());
 		dto.setMode(entity.getMode());
 		dto.setUserId(entity.getUserId());
+		dto.setNbQuestions(entity.getNbQuestions());
+		dto.setNbSuccess(entity.getNbSuccess());
 		dto.setValue(entity.getValue());
 		return dto;
 	}
