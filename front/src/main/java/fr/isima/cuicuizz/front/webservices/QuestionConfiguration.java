@@ -15,7 +15,7 @@ public class QuestionConfiguration {
 		marshaller.setContextPath("fr.isima.cuicuizz.front");
 		return marshaller;
 	}
-	
+
 	@Bean
 	public QuestionClient questionClient(Jaxb2Marshaller marshaller) {
 		final QuestionClient client = new QuestionClient();

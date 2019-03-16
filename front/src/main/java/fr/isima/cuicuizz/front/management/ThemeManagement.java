@@ -1,7 +1,6 @@
 package fr.isima.cuicuizz.front.management;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -17,19 +16,19 @@ import fr.isima.cuicuizz.front.services.IQuestionService;
 
 @Controller
 @Qualifier("ThemeManagement")
-public class ThemeManagement implements IManagement{
+public class ThemeManagement implements IManagement {
 
 	private List<Theme> themes;
-	
+
 	@Autowired
 	private IQuestionService questionService;
-	
+
 	@PostConstruct
 	public void getTheme() {
-		GetThemesResponse tr = questionService.getThemes();
-		themes = tr.getQuestions();
+		final GetThemesResponse tr = questionService.getThemes();
+		themes = tr.getThemes();
 	}
-	
+
 	@Override
 	public int handling() throws IOException {
 		boolean falseEntry = true;
@@ -42,7 +41,7 @@ public class ThemeManagement implements IManagement{
 	}
 
 	@Override
-	public int choose() {		
+	public int choose() {
 		System.out.println("Choose the theme of the question:");
 		for (int i = 0; i < themes.size(); i++) {
 			System.out.println(i + "." + themes.get(i).getName());
@@ -55,7 +54,7 @@ public class ThemeManagement implements IManagement{
 		}
 		return themeId + 1;
 	}
-	
+
 	@Override
 	public boolean handlingEntry(int idTheme) throws IOException {
 		boolean correctEntry = false;

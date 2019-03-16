@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="user" type="{http://spring.io/guides/gs-producing-web-service}userDto"/>
+ *         &lt;element name="mode" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,36 +36,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "user"
+    "mode"
 })
-@XmlRootElement(name = "addUser")
-public class AddUser {
+@XmlRootElement(name = "getAllModesScores")
+public class GetAllModesScores {
 
     @XmlElement(required = true)
-    protected UserDto user;
+    protected String mode;
 
     /**
-     * Obtient la valeur de la propriété user.
+     * Obtient la valeur de la propriété mode.
      * 
      * @return
      *     possible object is
-     *     {@link UserDto }
+     *     {@link String }
      *     
      */
-    public UserDto getUser() {
-        return user;
+    public String getMode() {
+        return mode;
     }
 
     /**
-     * Définit la valeur de la propriété user.
+     * Définit la valeur de la propriété mode.
      * 
      * @param value
      *     allowed object is
-     *     {@link UserDto }
+     *     {@link String }
      *     
      */
-    public void setUser(UserDto value) {
-        this.user = value;
+    public void setMode(String value) {
+        this.mode = value;
     }
 
 }

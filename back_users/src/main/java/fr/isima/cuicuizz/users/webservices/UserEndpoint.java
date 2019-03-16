@@ -9,10 +9,10 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import fr.isima.cuicuizz.users.services.interfaces.IUserService;
 import io.spring.guides.gs_producing_web_service.AddUser;
 import io.spring.guides.gs_producing_web_service.BooleanResponse;
+import io.spring.guides.gs_producing_web_service.Disconnect;
 import io.spring.guides.gs_producing_web_service.IsConnected;
 import io.spring.guides.gs_producing_web_service.Login;
 import io.spring.guides.gs_producing_web_service.UserDto;
-import io.spring.guides.gs_producing_web_service.UserRequest;
 
 @Endpoint
 public class UserEndpoint {
@@ -23,10 +23,12 @@ public class UserEndpoint {
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "addUser")
 	@ResponsePayload
-	public UserRequest addUser(@RequestPayload AddUser dto) {
-		final UserRequest ur = new UserRequest();
-		ur.setUser(userService.addUser(dto.getUser()));
-		return ur;
+	public BooleanResponse addUser(@RequestPayload AddUser dto) {
+		final BooleanResponse br = new BooleanResponse();
+		userService.addUser(dto.getUser());
+		// FIXME prendre en compte le résultat de retour de l'add
+		br.setValue(true);
+		return br;
 	}
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "login")
@@ -47,7 +49,11 @@ public class UserEndpoint {
 	}
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "disconnect")
-	public void disconnect(@RequestPayload int id) {
-		userService.disconnect(id);
+	public BooleanResponse disconnect(@RequestPayload Disconnect disconnect) {
+		userService.disconnect(disconnect.getUser().getId());
+		final BooleanResponse br = new BooleanResponse();
+		// FIXME prendre en compte le résultat de retour de l'add
+		br.setValue(true);
+		return br;
 	}
 }

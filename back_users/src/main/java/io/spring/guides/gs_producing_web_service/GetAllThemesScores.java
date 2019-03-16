@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="user" type="{http://spring.io/guides/gs-producing-web-service}userDto"/>
+ *         &lt;element name="theme" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,36 +36,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "user"
+    "theme"
 })
-@XmlRootElement(name = "addUser")
-public class AddUser {
+@XmlRootElement(name = "getAllThemesScores")
+public class GetAllThemesScores {
 
     @XmlElement(required = true)
-    protected UserDto user;
+    protected String theme;
 
     /**
-     * Obtient la valeur de la propriété user.
+     * Obtient la valeur de la propriété theme.
      * 
      * @return
      *     possible object is
-     *     {@link UserDto }
+     *     {@link String }
      *     
      */
-    public UserDto getUser() {
-        return user;
+    public String getTheme() {
+        return theme;
     }
 
     /**
-     * Définit la valeur de la propriété user.
+     * Définit la valeur de la propriété theme.
      * 
      * @param value
      *     allowed object is
-     *     {@link UserDto }
+     *     {@link String }
      *     
      */
-    public void setUser(UserDto value) {
-        this.user = value;
+    public void setTheme(String value) {
+        this.theme = value;
     }
 
 }

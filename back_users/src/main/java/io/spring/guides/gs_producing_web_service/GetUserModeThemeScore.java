@@ -26,6 +26,8 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="user" type="{http://spring.io/guides/gs-producing-web-service}userDto"/>
+ *         &lt;element name="mode" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="theme" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,13 +38,19 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "user"
+    "user",
+    "mode",
+    "theme"
 })
-@XmlRootElement(name = "addUser")
-public class AddUser {
+@XmlRootElement(name = "getUserModeThemeScore")
+public class GetUserModeThemeScore {
 
     @XmlElement(required = true)
     protected UserDto user;
+    @XmlElement(required = true)
+    protected String mode;
+    @XmlElement(required = true)
+    protected String theme;
 
     /**
      * Obtient la valeur de la propriété user.
@@ -66,6 +74,54 @@ public class AddUser {
      */
     public void setUser(UserDto value) {
         this.user = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété mode.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getMode() {
+        return mode;
+    }
+
+    /**
+     * Définit la valeur de la propriété mode.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setMode(String value) {
+        this.mode = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété theme.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getTheme() {
+        return theme;
+    }
+
+    /**
+     * Définit la valeur de la propriété theme.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setTheme(String value) {
+        this.theme = value;
     }
 
 }

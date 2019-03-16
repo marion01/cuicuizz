@@ -96,7 +96,7 @@
 					<schemaDirectory>${project.basedir}/src/main/resources/xsd/</schemaDirectory>
 					<schemaFiles>*.xsd</schemaFiles>
 					<outputDirectory>${project.basedir}/src/main/java</outputDirectory>
-					<clearOutputDir>true</clearOutputDir>
+					<clearOutputDir>false</clearOutputDir>
 				</configuration>
 			</plugin>
 		</plugins>

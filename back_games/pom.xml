@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>fr.isima</groupId>
-	<artifactId>cuicuizz</artifactId>
+	<artifactId>cuicuizz.games</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>cuicuizz</name>
 	<description>Cuicuizz project for Spring Boot</description>
@@ -96,7 +96,7 @@
 					<schemaDirectory>${project.basedir}/src/main/resources/xsd/</schemaDirectory>
 					<schemaFiles>*.xsd</schemaFiles>
 					<outputDirectory>${project.basedir}/src/main/java</outputDirectory>
-					<clearOutputDir>true</clearOutputDir>
+					<clearOutputDir>false</clearOutputDir>
 				</configuration>
 			</plugin>
 		</plugins>

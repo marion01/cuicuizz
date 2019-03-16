@@ -26,6 +26,6 @@ public class ThemeConfig {
 
 	@Bean(name = "themesSchema")
 	public XsdSchema themesSchema() {
-		return new SimpleXsdSchema(new ClassPathResource("theme.xsd"));
+		return new SimpleXsdSchema(new ClassPathResource("xsd/theme.xsd"));
 	}
 }

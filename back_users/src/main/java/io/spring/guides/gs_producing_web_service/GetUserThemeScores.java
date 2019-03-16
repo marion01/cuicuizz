@@ -2,7 +2,7 @@
 // Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.7 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2019.03.14 à 09:55:18 PM CET 
+// Généré le : 2019.03.16 à 01:08:15 PM CET 
 //
 
 
@@ -25,7 +25,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="score" type="{http://spring.io/guides/gs-producing-web-service}scoreDto"/>
+ *         &lt;element name="user" type="{http://spring.io/guides/gs-producing-web-service}userDto"/>
+ *         &lt;element name="theme" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,36 +37,63 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "score"
+    "user",
+    "theme"
 })
-@XmlRootElement(name = "scoreRequest")
-public class ScoreRequest {
+@XmlRootElement(name = "getUserThemeScores")
+public class GetUserThemeScores {
 
     @XmlElement(required = true)
-    protected ScoreDto score;
+    protected UserDto user;
+    @XmlElement(required = true)
+    protected String theme;
 
     /**
-     * Obtient la valeur de la propriété score.
+     * Obtient la valeur de la propriété user.
      * 
      * @return
      *     possible object is
-     *     {@link ScoreDto }
+     *     {@link UserDto }
      *     
      */
-    public ScoreDto getScore() {
-        return score;
+    public UserDto getUser() {
+        return user;
     }
 
     /**
-     * Définit la valeur de la propriété score.
+     * Définit la valeur de la propriété user.
      * 
      * @param value
      *     allowed object is
-     *     {@link ScoreDto }
+     *     {@link UserDto }
      *     
      */
-    public void setScore(ScoreDto value) {
-        this.score = value;
+    public void setUser(UserDto value) {
+        this.user = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété theme.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getTheme() {
+        return theme;
+    }
+
+    /**
+     * Définit la valeur de la propriété theme.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setTheme(String value) {
+        this.theme = value;
     }
 
 }

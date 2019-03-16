@@ -27,7 +27,7 @@ public class NbQuestionConfig extends WsConfigurerAdapter {
 
 	@Bean(name = "nbQuestionsSchema")
 	public XsdSchema nbQuestionsSchema() {
-		return new SimpleXsdSchema(new ClassPathResource("nbQuestions.xsd"));
+		return new SimpleXsdSchema(new ClassPathResource("xsd/nbQuestions.xsd"));
 	}
 
 }

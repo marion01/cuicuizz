@@ -2,7 +2,7 @@
 // Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.7 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2019.03.14 à 09:55:18 PM CET 
+// Généré le : 2019.03.16 à 01:08:15 PM CET 
 //
 
 
@@ -37,19 +37,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ScoreRequest }
+     * Create an instance of {@link GetAllModesScores }
      * 
      */
-    public ScoreRequest createScoreRequest() {
-        return new ScoreRequest();
-    }
-
-    /**
-     * Create an instance of {@link ScoreDto }
-     * 
-     */
-    public ScoreDto createScoreDto() {
-        return new ScoreDto();
+    public GetAllModesScores createGetAllModesScores() {
+        return new GetAllModesScores();
     }
 
     /**
@@ -69,11 +61,91 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetAllScores }
+     * 
+     */
+    public GetAllScores createGetAllScores() {
+        return new GetAllScores();
+    }
+
+    /**
      * Create an instance of {@link IsConnected }
      * 
      */
     public IsConnected createIsConnected() {
         return new IsConnected();
+    }
+
+    /**
+     * Create an instance of {@link Login }
+     * 
+     */
+    public Login createLogin() {
+        return new Login();
+    }
+
+    /**
+     * Create an instance of {@link ScoreResponse }
+     * 
+     */
+    public ScoreResponse createScoreResponse() {
+        return new ScoreResponse();
+    }
+
+    /**
+     * Create an instance of {@link ScoreDto }
+     * 
+     */
+    public ScoreDto createScoreDto() {
+        return new ScoreDto();
+    }
+
+    /**
+     * Create an instance of {@link GetAllThemesScores }
+     * 
+     */
+    public GetAllThemesScores createGetAllThemesScores() {
+        return new GetAllThemesScores();
+    }
+
+    /**
+     * Create an instance of {@link GetUserModeScores }
+     * 
+     */
+    public GetUserModeScores createGetUserModeScores() {
+        return new GetUserModeScores();
+    }
+
+    /**
+     * Create an instance of {@link Disconnect }
+     * 
+     */
+    public Disconnect createDisconnect() {
+        return new Disconnect();
+    }
+
+    /**
+     * Create an instance of {@link GetUserModeThemeScore }
+     * 
+     */
+    public GetUserModeThemeScore createGetUserModeThemeScore() {
+        return new GetUserModeThemeScore();
+    }
+
+    /**
+     * Create an instance of {@link GetUserScores }
+     * 
+     */
+    public GetUserScores createGetUserScores() {
+        return new GetUserScores();
+    }
+
+    /**
+     * Create an instance of {@link AddScore }
+     * 
+     */
+    public AddScore createAddScore() {
+        return new AddScore();
     }
 
     /**
@@ -85,11 +157,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Login }
+     * Create an instance of {@link GetUserThemeScores }
      * 
      */
-    public Login createLogin() {
-        return new Login();
+    public GetUserThemeScores createGetUserThemeScores() {
+        return new GetUserThemeScores();
     }
 
 }

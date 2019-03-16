@@ -2,7 +2,7 @@
 // Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.7 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2019.03.14 à 09:55:18 PM CET 
+// Généré le : 2019.03.16 à 01:08:15 PM CET 
 //
 
 
@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="mode" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="theme" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="nbQuestions" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="value" type="{http://www.w3.org/2001/XMLSchema}double"/>
+ *         &lt;element name="value" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -56,7 +56,8 @@ public class ScoreDto {
     @XmlElement(required = true)
     protected String theme;
     protected int nbQuestions;
-    protected double value;
+    @XmlElement(required = true)
+    protected String value;
 
     /**
      * Obtient la valeur de la propriété id.
@@ -157,16 +158,24 @@ public class ScoreDto {
     /**
      * Obtient la valeur de la propriété value.
      * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public double getValue() {
+    public String getValue() {
         return value;
     }
 
     /**
      * Définit la valeur de la propriété value.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public void setValue(double value) {
+    public void setValue(String value) {
         this.value = value;
     }
 
