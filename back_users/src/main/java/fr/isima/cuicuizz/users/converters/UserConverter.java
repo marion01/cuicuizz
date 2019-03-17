@@ -41,7 +41,7 @@ public class UserConverter {
 		final UserDto dto = new UserDto();
 		dto.setId(entity.getId());
 		dto.setPseudo(entity.getPseudo());
-		dto.setPassword(null);
+		dto.setPassword(entity.getPassword());
 		return dto;
 	}
 }

@@ -1,13 +1,21 @@
 package fr.isima.cuicuizz.users.model;
 
-import java.util.Date;
-
 public class User {
 	private int id;	
 	private String pseudo;
-	private Date lastActionDate;
+	private String lastActionDate;
 	private String password;
 	
+	public User(int id, String pseudo, String lastActionDate, String password) {
+		this.id = id;
+		this.pseudo = pseudo;
+		this.lastActionDate = lastActionDate;
+		this.password = password;
+	}
+	
+	public User() {
+		
+	}
 	public int getId() {
 		return id;
 	}
@@ -20,10 +28,10 @@ public class User {
 	public void setPseudo(String pseudo) {
 		this.pseudo = pseudo;
 	}
-	public Date getLastActionDate() {
+	public String getLastActionDate() {
 		return lastActionDate;
 	}
-	public void setLastActionDate(Date lastActionDate) {
+	public void setLastActionDate(String lastActionDate) {
 		this.lastActionDate = lastActionDate;
 	}
 	public String getPassword() {

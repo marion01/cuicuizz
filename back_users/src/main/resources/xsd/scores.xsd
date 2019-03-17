@@ -55,6 +55,14 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
+	
+	<xs:element name="score">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="score" type="tns:scoreDto"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 
 	<xs:element name="addScore">
 		<xs:complexType>
@@ -90,6 +98,7 @@
 			<xs:element name="mode" type="xs:string" />
 			<xs:element name="theme" type="xs:string" />
 			<xs:element name="nbQuestions" type="xs:int" />
+			<xs:element name="nbSuccess" type="xs:int" />
 			<xs:element name="value" type="xs:string" />
 		</xs:sequence>
 	</xs:complexType>

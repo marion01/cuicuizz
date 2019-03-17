@@ -8,7 +8,6 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import fr.isima.cuicuizz.users.services.interfaces.IScoreService;
 import io.spring.guides.gs_producing_web_service.AddScore;
-import io.spring.guides.gs_producing_web_service.BooleanResponse;
 import io.spring.guides.gs_producing_web_service.GetAllModesScores;
 import io.spring.guides.gs_producing_web_service.GetAllScores;
 import io.spring.guides.gs_producing_web_service.GetAllThemesScores;
@@ -16,6 +15,8 @@ import io.spring.guides.gs_producing_web_service.GetUserModeScores;
 import io.spring.guides.gs_producing_web_service.GetUserModeThemeScore;
 import io.spring.guides.gs_producing_web_service.GetUserScores;
 import io.spring.guides.gs_producing_web_service.GetUserThemeScores;
+import io.spring.guides.gs_producing_web_service.Score;
+import io.spring.guides.gs_producing_web_service.ScoreDto;
 import io.spring.guides.gs_producing_web_service.ScoreResponse;
 
 @Endpoint
@@ -35,11 +36,10 @@ public class ScoreEndpoint {
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "addScore")
 	@ResponsePayload
-	public BooleanResponse addScore(@RequestPayload AddScore dto) {
-		final BooleanResponse br = new BooleanResponse();
-		scoreService.addScore(dto.getScore());
-		// FIXME prendre en compte le résultat de retour de l'add
-		br.setValue(true);
+	public Score addScore(@RequestPayload AddScore dto) {
+		final Score br = new Score();
+		final ScoreDto result = scoreService.addScore(dto.getScore());
+		br.setScore(result);
 		return br;
 	}
 
@@ -63,9 +63,6 @@ public class ScoreEndpoint {
 	@ResponsePayload
 	public ScoreResponse getUserScore(@RequestPayload GetUserModeThemeScore umts) {
 		final ScoreResponse sr = new ScoreResponse();
-
-		// FIXME cette fonction ne devrait pas renvoyer la liste de tous les
-		// scores pour un user sur un thème et un mode et donc une liste?
 
 		sr.getScores().add(scoreService.getUserScore(umts.getUser().getId(), umts.getMode(), umts.getTheme()));
 		return sr;

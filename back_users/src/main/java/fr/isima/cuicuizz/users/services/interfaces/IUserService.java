@@ -6,9 +6,9 @@ public interface IUserService {
 	
 	boolean login(String pseudo, String password);
 	
-	UserDto addUser(UserDto user);
+	UserDto addUser(UserDto user) throws Exception;
 	
-	boolean isConnected(int id);
+	boolean isConnected(String pseudo);
 	
 	void disconnect(int id);
 

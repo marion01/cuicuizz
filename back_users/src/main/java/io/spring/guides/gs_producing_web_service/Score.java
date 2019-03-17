@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="user" type="{http://spring.io/guides/gs-producing-web-service}userDto"/>
+ *         &lt;element name="score" type="{http://spring.io/guides/gs-producing-web-service}scoreDto"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,36 +36,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "user"
+    "score"
 })
-@XmlRootElement(name = "isConnected")
-public class IsConnected {
+@XmlRootElement(name = "score")
+public class Score {
 
     @XmlElement(required = true)
-    protected UserDto user;
+    protected ScoreDto score;
 
     /**
-     * Obtient la valeur de la propriété user.
+     * Obtient la valeur de la propriété score.
      * 
      * @return
      *     possible object is
-     *     {@link UserDto }
+     *     {@link ScoreDto }
      *     
      */
-    public UserDto getUser() {
-        return user;
+    public ScoreDto getScore() {
+        return score;
     }
 
     /**
-     * Définit la valeur de la propriété user.
+     * Définit la valeur de la propriété score.
      * 
      * @param value
      *     allowed object is
-     *     {@link UserDto }
+     *     {@link ScoreDto }
      *     
      */
-    public void setUser(UserDto value) {
-        this.user = value;
+    public void setScore(ScoreDto value) {
+        this.score = value;
     }
 
 }

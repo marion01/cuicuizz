@@ -2,7 +2,7 @@
 // Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.7 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2019.03.16 à 01:08:15 PM CET 
+// Généré le : 2019.03.17 à 11:37:54 AM CET 
 //
 
 
@@ -109,6 +109,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Score }
+     * 
+     */
+    public Score createScore() {
+        return new Score();
+    }
+
+    /**
      * Create an instance of {@link GetUserModeScores }
      * 
      */
@@ -154,6 +162,14 @@ public class ObjectFactory {
      */
     public BooleanResponse createBooleanResponse() {
         return new BooleanResponse();
+    }
+
+    /**
+     * Create an instance of {@link User }
+     * 
+     */
+    public User createUser() {
+        return new User();
     }
 
     /**

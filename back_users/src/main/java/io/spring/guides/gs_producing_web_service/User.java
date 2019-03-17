@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="user" type="{http://spring.io/guides/gs-producing-web-service}userDto"/>
+ *         &lt;element name="userDto" type="{http://spring.io/guides/gs-producing-web-service}userDto"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,36 +36,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "user"
+    "userDto"
 })
-@XmlRootElement(name = "isConnected")
-public class IsConnected {
+@XmlRootElement(name = "user")
+public class User {
 
     @XmlElement(required = true)
-    protected UserDto user;
+    protected UserDto userDto;
 
     /**
-     * Obtient la valeur de la propriété user.
+     * Obtient la valeur de la propriété userDto.
      * 
      * @return
      *     possible object is
      *     {@link UserDto }
      *     
      */
-    public UserDto getUser() {
-        return user;
+    public UserDto getUserDto() {
+        return userDto;
     }
 
     /**
-     * Définit la valeur de la propriété user.
+     * Définit la valeur de la propriété userDto.
      * 
      * @param value
      *     allowed object is
      *     {@link UserDto }
      *     
      */
-    public void setUser(UserDto value) {
-        this.user = value;
+    public void setUserDto(UserDto value) {
+        this.userDto = value;
     }
 
 }

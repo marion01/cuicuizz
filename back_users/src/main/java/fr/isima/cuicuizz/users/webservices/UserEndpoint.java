@@ -12,6 +12,7 @@ import io.spring.guides.gs_producing_web_service.BooleanResponse;
 import io.spring.guides.gs_producing_web_service.Disconnect;
 import io.spring.guides.gs_producing_web_service.IsConnected;
 import io.spring.guides.gs_producing_web_service.Login;
+import io.spring.guides.gs_producing_web_service.User;
 import io.spring.guides.gs_producing_web_service.UserDto;
 
 @Endpoint
@@ -23,12 +24,12 @@ public class UserEndpoint {
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "addUser")
 	@ResponsePayload
-	public BooleanResponse addUser(@RequestPayload AddUser dto) {
-		final BooleanResponse br = new BooleanResponse();
-		userService.addUser(dto.getUser());
-		// FIXME prendre en compte le résultat de retour de l'add
-		br.setValue(true);
-		return br;
+
+	public User addUser(@RequestPayload AddUser dto) throws Exception {
+		final User ur = new User();
+		ur.setUserDto(userService.addUser(dto.getUser()));
+		return ur;
+
 	}
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "login")
@@ -44,16 +45,13 @@ public class UserEndpoint {
 	@ResponsePayload
 	public BooleanResponse isConnected(@RequestPayload IsConnected isConnected) {
 		final BooleanResponse br = new BooleanResponse();
-		br.setValue(userService.isConnected(isConnected.getUser().getId()));
+		br.setValue(userService.isConnected(isConnected.getUser().getPseudo()));
 		return br;
 	}
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "disconnect")
-	public BooleanResponse disconnect(@RequestPayload Disconnect disconnect) {
+	public void disconnect(@RequestPayload Disconnect disconnect) {
 		userService.disconnect(disconnect.getUser().getId());
-		final BooleanResponse br = new BooleanResponse();
-		// FIXME prendre en compte le résultat de retour de l'add
-		br.setValue(true);
-		return br;
+
 	}
 }
