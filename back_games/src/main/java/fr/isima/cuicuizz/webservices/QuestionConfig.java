@@ -10,10 +10,23 @@ import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
 import org.springframework.xml.xsd.XsdSchema;
 
+/**
+ * Question Configuration
+ * 
+ * @author fabie
+ *
+ */
 @EnableWs
 @Configuration
 public class QuestionConfig extends WsConfigurerAdapter {
 
+	/**
+	 * wsdl definition for questions, uses global config for app context and
+	 * questionSchema using qualifier
+	 * 
+	 * @param questionsSchema
+	 * @return
+	 */
 	@Bean(name = "questions")
 	@Qualifier(value = "questionsSchema")
 	public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema questionsSchema) {
@@ -25,6 +38,11 @@ public class QuestionConfig extends WsConfigurerAdapter {
 		return wsdl11Definition;
 	}
 
+	/**
+	 * sets xsd schema for questions
+	 * 
+	 * @return
+	 */
 	@Bean(name = "questionsSchema")
 	public XsdSchema questionsSchema() {
 		return new SimpleXsdSchema(new ClassPathResource("xsd/questions.xsd"));

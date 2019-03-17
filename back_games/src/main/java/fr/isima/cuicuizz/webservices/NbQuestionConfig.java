@@ -10,10 +10,22 @@ import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
 import org.springframework.xml.xsd.XsdSchema;
 
+/**
+ * NbQuestion configuration
+ * 
+ *
+ */
 @EnableWs
 @Configuration
 public class NbQuestionConfig extends WsConfigurerAdapter {
 
+	/**
+	 * wsdl definition for nbQuestion, uses global config for app context and
+	 * nbQuestionSchema using qualifier
+	 * 
+	 * @param nbQuestionsSchema
+	 * @return
+	 */
 	@Bean(name = "nbQuestions")
 	@Qualifier(value = "nbQuestionsSchema")
 	public DefaultWsdl11Definition NbQuestionsWsdl11Definition(XsdSchema nbQuestionsSchema) {
@@ -25,6 +37,11 @@ public class NbQuestionConfig extends WsConfigurerAdapter {
 		return wsdl11Definition;
 	}
 
+	/**
+	 * sets xsd schema for nbQuestions
+	 * 
+	 * @return
+	 */
 	@Bean(name = "nbQuestionsSchema")
 	public XsdSchema nbQuestionsSchema() {
 		return new SimpleXsdSchema(new ClassPathResource("xsd/nbQuestions.xsd"));

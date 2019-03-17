@@ -9,10 +9,20 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.sqlite.SQLiteDataSource;
 
+/**
+ * Configuration class for MyBatis Framework.
+ * 
+ *
+ */
 @Configuration
 @MapperScan("fr.isima.cuicuizz.dbaccess.mybatis.dao")
 public class DataConfig {
 
+	/**
+	 * data source definition, uses database realtive path in resources of project
+	 * 
+	 * @return
+	 */
 	@Bean
 	public DataSource dataSource() {
 		final SQLiteDataSource dataSource = new SQLiteDataSource();
@@ -27,6 +37,12 @@ public class DataConfig {
 		return new DataSourceTransactionManager(dataSource());
 	}
 
+	/**
+	 * session configuration
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
 	@Bean
 	public SqlSessionFactoryBean sqlSessionFactory() throws Exception {
 		final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();

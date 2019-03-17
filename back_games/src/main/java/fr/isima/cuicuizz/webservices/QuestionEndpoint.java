@@ -14,6 +14,12 @@ import io.spring.guides.gs_producing_web_service.GetQuestionResponse;
 import io.spring.guides.gs_producing_web_service.GetThemesRequest;
 import io.spring.guides.gs_producing_web_service.GetThemesResponse;
 
+/**
+ * Endpoint exposed by Spring webservices. WSDLs are accessible on
+ * localhost:9000/ws/localPart.wsdl once server is booted
+ * 
+ *
+ */
 @Endpoint
 public class QuestionEndpoint {
 	private static final String NAMESPACE_URI = "http://spring.io/guides/gs-producing-web-service";
@@ -21,6 +27,12 @@ public class QuestionEndpoint {
 	@Autowired
 	private IQuestionService questionService;
 
+	/**
+	 * Returns list of questions based on theme Id and number of questions needed
+	 * 
+	 * @param request
+	 * @return
+	 */
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getQuestionRequest")
 	@ResponsePayload
 	public GetQuestionResponse getQuestions(@RequestPayload GetQuestionRequest request) {
@@ -29,6 +41,12 @@ public class QuestionEndpoint {
 		return response;
 	}
 
+	/**
+	 * Returns the number of questions existing in database for a given theme
+	 * 
+	 * @param request
+	 * @return
+	 */
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getNbQuestionRequest")
 	@ResponsePayload
 	public GetNbQuestionResponse getNbQuestionFromTheme(@RequestPayload GetNbQuestionRequest request) {
@@ -37,6 +55,12 @@ public class QuestionEndpoint {
 		return response;
 	}
 
+	/**
+	 * returns all the question themes available in database
+	 * 
+	 * @param request
+	 * @return
+	 */
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getThemesRequest")
 	@ResponsePayload
 	public GetThemesResponse getThemes(@RequestPayload GetThemesRequest request) {

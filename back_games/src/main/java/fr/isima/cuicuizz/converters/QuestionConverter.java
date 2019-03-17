@@ -6,6 +6,12 @@ import java.util.List;
 import fr.isima.cuicuizz.model.QuestionModel;
 import io.spring.guides.gs_producing_web_service.Question;
 
+/**
+ * Converter class from Questions to webservice response
+ * 
+ * @author fabie
+ *
+ */
 public class QuestionConverter {
 
 	public static Question convert(QuestionModel questionModel) {

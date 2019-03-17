@@ -14,6 +14,11 @@ import fr.isima.cuicuizz.services.interfaces.IQuestionService;
 import io.spring.guides.gs_producing_web_service.Question;
 import io.spring.guides.gs_producing_web_service.Theme;
 
+/**
+ * Service used to process webservices calls
+ * 
+ *
+ */
 @Service
 public class QuestionService implements IQuestionService {
 

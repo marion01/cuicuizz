@@ -9,10 +9,21 @@ import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
 import org.springframework.xml.xsd.XsdSchema;
 
+/**
+ * Theme Configuration
+ *
+ */
 @EnableWs
 @Configuration
 public class ThemeConfig {
 
+	/**
+	 * wsdl definition for themes, uses global config for app context and
+	 * themesSchema using qualifier
+	 * 
+	 * @param themesSchema
+	 * @return
+	 */
 	@Bean(name = "themes")
 	@Qualifier(value = "themesSchema")
 	public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema themesSchema) {
@@ -24,6 +35,11 @@ public class ThemeConfig {
 		return wsdl11Definition;
 	}
 
+	/**
+	 * sets xsd schema for themes
+	 * 
+	 * @return
+	 */
 	@Bean(name = "themesSchema")
 	public XsdSchema themesSchema() {
 		return new SimpleXsdSchema(new ClassPathResource("xsd/theme.xsd"));

@@ -6,6 +6,12 @@ import java.util.List;
 import fr.isima.cuicuizz.model.AnswerModel;
 import io.spring.guides.gs_producing_web_service.Answer;
 
+/**
+ * Converter class from Models to webservice response
+ * 
+ * @author fabie
+ *
+ */
 public class AnswerConverter {
 
 	public static Answer convert(AnswerModel answerModel) {

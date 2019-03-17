@@ -7,6 +7,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.transport.http.MessageDispatcherServlet;
 
+/**
+ * Global Webservice Configuration. Sets the application context for all
+ * endpoints
+ *
+ */
 @Configuration
 @EnableWs
 public class GlobalConfig {
