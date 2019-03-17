@@ -16,9 +16,12 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.jdbc.UncategorizedSQLException;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.SqlConfig;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import fr.isima.cuicuizz.users.converters.ScoreConverter;
 import fr.isima.cuicuizz.users.converters.UserConverter;
@@ -31,8 +34,10 @@ import fr.isima.cuicuizz.users.services.interfaces.IUserService;
 import io.spring.guides.gs_producing_web_service.ScoreDto;
 import io.spring.guides.gs_producing_web_service.UserDto;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "/beans.xml" })
+@SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager")
+@EntityScan(basePackages = "fr.isima.cuicuizz.users.dbaccess.mybatis.dao")
 public class CuicuizzUsersApplicationTests {
 
 	@Autowired
@@ -76,6 +81,11 @@ public class CuicuizzUsersApplicationTests {
 	}
 	
 	@Test
+	public void scoreConvertNullDtoToEntityTest() {
+		assertNull(ScoreConverter.convertDtoToEntity(null));
+	}
+	
+	@Test
 	public void scoreConvertEntityToDtoTest() {
 		Score score = new Score();
 		ScoreDto sd;
@@ -98,6 +108,11 @@ public class CuicuizzUsersApplicationTests {
 		assertEquals(score.getNbSuccess(), sd.getNbSuccess());
 		assertEquals(score.getValue(), sd.getValue());
 	}
+	
+	@Test
+	public void scoreConvertNullEntityToDtoTest() {
+		assertNull(ScoreConverter.convertEntityToDto(null));
+	}
 
 	/*
 	 * UserConverter tests
@@ -108,7 +123,7 @@ public class CuicuizzUsersApplicationTests {
 		UserDto ud = new UserDto();
 		User user;
 		
-		ud.setId(2);
+		ud.setId(0);
 		ud.setPassword("password");
 		ud.setPseudo("pseudo");
 		
@@ -116,8 +131,40 @@ public class CuicuizzUsersApplicationTests {
 
 		assertEquals(ud.getId(), user.getId());
 		assertEquals(ud.getPseudo(), user.getPseudo());
-		
 		assertEquals(getHash(ud.getPassword()), user.getPassword());
+	}
+	
+	@Test
+	public void userConvertNullDtoToEntityTest() {
+		assertNull(UserConverter.convertDtoToEntity(null));
+	}
+	
+	@Test
+	public void userConvertNoPasswordDtoToEntityTest() {
+		UserDto ud = new UserDto();
+		User user;
+		
+		ud.setId(0);
+		ud.setPassword(null);
+		ud.setPseudo("pseudo");
+		
+		user = UserConverter.convertDtoToEntity(ud);
+
+		assertEquals(ud.getPassword(), user.getPassword());
+	}
+	
+	@Test
+	public void userConvertEmptyPasswordDtoToEntityTest() {
+		UserDto ud = new UserDto();
+		User user;
+		
+		ud.setId(0);
+		ud.setPassword("");
+		ud.setPseudo("pseudo");
+		
+		user = UserConverter.convertDtoToEntity(ud);
+		
+		assertNull(user.getPassword());
 	}
 	
 	@Test
@@ -125,7 +172,7 @@ public class CuicuizzUsersApplicationTests {
 		User user = new User();
 		UserDto ud;
 		
-		user.setId(1);
+		user.setId(0);
 		user.setPseudo("pseudo");
 		user.setPassword("password");
 		
@@ -135,126 +182,22 @@ public class CuicuizzUsersApplicationTests {
 		assertEquals(user.getPseudo(), ud.getPseudo());
 		assertEquals(user.getPassword(), ud.getPassword());
 	}
+	
+	@Test
+	public void userConvertNullEntityToDtoTest() {
+		assertNull(UserConverter.convertEntityToDto(null));
+	}
 
 	/*
 	 * ScoreMapper tests
 	 */
-	
-	@Test
-	public void getUserScoresTest() {
-		List<Score> scores = scoreMapper.getUserScores(1);
-		
-		assertEquals(3, scores.size());
-		for(Score score : scores) assertEquals(1, score.getUserId());
-	}
-	
-	@Test
-	public void getNonExistingUserScoresTest() {
-		assertEquals(0, scoreMapper.getUserScores(0).size());
-	}
-	
-	@Test
-	public void getUserScoreTest() {
-		Score score = scoreMapper.getUserScore(1, "Normal", "Culture générale");
 
-		assertEquals(1, score.getUserId());
-		assertEquals("Normal", score.getMode());
-		assertEquals("Culture générale", score.getTheme());
-	}
-	
 	@Test
-	public void getNonExistingUserScoreTest() {
-		assertNull(scoreMapper.getUserScore(0, "mode", "theme"));
-	}
-	
-	@Test
-	public void getUserModeScoresTest() {
-		List<Score> scores = scoreMapper.getUserModeScores(1, "Normal");
-		
-		assertEquals(2, scores.size());
-		for(Score score : scores) assertEquals(1, score.getUserId());
-	}
-	
-	@Test
-	public void getNonExistingUserModeScoresTest() {
-		assertEquals(0, scoreMapper.getUserModeScores(0, "mode").size());
-	}
-	
-	@Test
-	public void getUserThemeScoresTest() {
-		List<Score> scores = scoreMapper.getUserThemeScores(1, "Culture générale");
-		
-		assertEquals(2, scores.size());
-		for(Score score : scores) assertEquals(1, score.getUserId());
-	}
-	
-	@Test
-	public void getNonExistingUserThemeScoresTest() {
-		assertEquals(0, scoreMapper.getUserThemeScores(0, "Culture générale").size());
-	}
-	
-	@Test
-	public void addScoreTest() {
-		Score score = new Score(), scoreDb;
-		
-		score.setId(5);
-		score.setUserId(1);
-		score.setMode("mode");
-		score.setTheme("theme");
-		score.setNbQuestions(2);
-		score.setNbQuestions(3);
-		score.setValue("value");
-		
-		scoreMapper.addScore(score);
-		
-		scoreDb = scoreMapper.getUserScore(1, "mode", "theme");
-		
-		scoreMapper.deleteScore(score);
-
-		assertEquals(score.getUserId(), scoreDb.getUserId());
-		assertEquals(score.getMode(), scoreDb.getMode());
-		assertEquals(score.getTheme(), scoreDb.getTheme());
-		assertEquals(score.getNbQuestions(), scoreDb.getNbQuestions());
-		assertEquals(score.getNbSuccess(), scoreDb.getNbSuccess());
-		assertEquals(score.getValue(), scoreDb.getValue());
-		
-	}
-	
-	@Test
-	public void updateScoreTest() {
-		Score score = new Score(), scoreDb;
-		
-		score.setId(5);
-		score.setUserId(1);
-		score.setMode("mode");
-		score.setTheme("theme");
-		score.setNbQuestions(2);
-		score.setNbSuccess(3);
-		score.setValue("value");
-		
-		scoreMapper.addScore(score);
-
-		score.setNbQuestions(4);
-		score.setNbSuccess(5);
-		score.setValue("new value");
-		
-		scoreMapper.updateScore(score);
-		
-		scoreDb = scoreMapper.getUserScore(1, "mode", "theme");
-		
-		scoreMapper.deleteScore(scoreDb);
-
-		assertEquals(score.getNbQuestions(), scoreDb.getNbQuestions());
-		assertEquals(score.getNbSuccess(), scoreDb.getNbSuccess());
-		assertEquals(score.getValue(), scoreDb.getValue());
-		
-	}
-	
-	@Test
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
 	public void updateNonExistentScoreTest() {
 		Score score = new Score();
 		
-		score.setId(5);
 		score.setUserId(1);
 		score.setMode("mode");
 		score.setTheme("theme");
@@ -266,102 +209,83 @@ public class CuicuizzUsersApplicationTests {
 		
 		assertNull(scoreMapper.getUserScore(1, "mode", "theme"));
 	}
-	
-	@Test
-	public void getAllScoresTest() {
-		assertEquals(4, scoreMapper.getAllScores().size());
-	}
-	
-	@Test
-	public void getAllModeScoresTest() {
-		assertEquals(3, scoreMapper.getAllModeScores("Normal").size());
-	}
-	
-	@Test
-	public void getAllThemeScoresTest() {
-		assertEquals(3, scoreMapper.getAllThemeScores("Culture générale").size());
-	}
 
 	/*
 	 * UserMapper tests
 	 */
-	
+
 	@Test
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
 	public void loginTest() {
-		User user = userMapper.login("pseudo1", "password1");
+		User user = userMapper.login("pseudo1", getHash("password1"));
 		
 		assertNotNull(user);
 		assertEquals("pseudo1", user.getPseudo());
-		assertEquals("password1", user.getPassword());
+		assertEquals(getHash("password1"), user.getPassword());
 	}
-	
+
 	@Test
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
 	public void loginIncorrectTest() {
 		assertNull(userMapper.login("wrong pseudo", "password"));
 	}
-	
+
 	@Test
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
 	public void updateLastActionDateTest() {
-		User user = new User(), userDb;
+		userMapper.updateLastActionDate("2019-03-20 15:00:00", userMapper.getUser("pseudo1").getId());
 		
-		user.setId(3);
-		user.setPseudo("pseudo");
-		user.setPassword("password");
-		user.setLastActionDate("2018-02-19 14:00:00");
-		userMapper.addUser(user);
-		
-		userMapper.updateLastActionDate("2019-03-20 15:00:00", 3);
-		
-		userDb = userMapper.getUser("pseudo");
-		userMapper.deleteUser(user);
-		
-		assertEquals("2019-03-20 15:00:00", userDb.getLastActionDate());
+		assertEquals("2019-03-20 15:00:00", userMapper.getUser("pseudo1").getLastActionDate());
 	}
-	
+
 	@Test
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
 	public void isPseudoExistingTest() {
 		assertEquals(1, userMapper.isPseudoExisting("pseudo1"));
 	}
-	
+
 	@Test
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
 	public void isNonExistingPseudoExistingTest() {
 		assertEquals(0, userMapper.isPseudoExisting("pseudo"));
 	}
-	
+
 	@Test
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
 	public void addUserTest() {
 		User user = new User(), userDb;
 		
-		user.setId(3);
-		user.setPseudo("pseudo");
-		user.setPassword("password");
+		user.setPseudo("pseudo3");
+		user.setPassword("password3");
 		user.setLastActionDate("2019-03-20 15:00:00");
-		userMapper.addUser(user);
+		
+		assertEquals(1, userMapper.addUser(user));
 				
-		userDb = userMapper.getUser("pseudo");
+		userDb = userMapper.getUser("pseudo3");
 		
-		userMapper.deleteUser(user);
-		
-		assertEquals(user.getId(), userDb.getId());
 		assertEquals(user.getPseudo(), userDb.getPseudo());
 		assertEquals(user.getPassword(), userDb.getPassword());
 		assertEquals("2019-03-20 15:00:00", userDb.getLastActionDate());
 	}
-	
-	@Test
-	public void addExistingUserTest() {
+
+	@Test(expected=DuplicateKeyException.class)
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
+	public void addExistingUserTest() throws DuplicateKeyException {
 		User user = new User();
 		
-		user.setId(3);
-		user.setPseudo("pseudo");
-		user.setPassword("password");
+		user.setPseudo("pseudo4");
+		user.setPassword("password4");
 		user.setLastActionDate("2019-03-20 15:00:00");
 		userMapper.addUser(user);
 		
-		try {
-			userMapper.addUser(user);
-			fail("Should throw SQLiteException");
-		} catch (UncategorizedSQLException ignored) { userMapper.deleteUser(user); }
+		userMapper.addUser(user);
 	}
 
 	/*
@@ -369,7 +293,99 @@ public class CuicuizzUsersApplicationTests {
 	 */
 	
 	@Test
-	public void addNonExistingScoreTest() {
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
+	public void getUserScoresTest() {
+		List<ScoreDto> scores = scoreService.getUserScores(1);
+		
+		assertEquals(3, scores.size());
+		for(ScoreDto score : scores) assertEquals(1, score.getUserId());
+	}
+	
+	@Test
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
+	public void getNonExistingUserScoresTest() {
+		assertEquals(0, scoreService.getUserScores(0).size());
+	}
+	
+	@Test
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
+	public void getUserScoreTest() {
+		ScoreDto score = scoreService.getUserScore(1, "mode1", "theme1");
+
+		assertEquals(1, score.getUserId());
+		assertEquals("mode1", score.getMode());
+		assertEquals("theme1", score.getTheme());
+	}
+	
+	@Test
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
+	public void getNonExistingUserScoreTest() {
+		assertNull(scoreService.getUserScore(0, "mode", "theme"));
+	}
+
+	@Test
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
+	public void getUserModeScoresTest() {
+		List<ScoreDto> scores = scoreService.getUserModeScores(1, "mode1");
+		
+		assertEquals(2, scores.size());
+		for(ScoreDto score : scores) assertEquals(1, score.getUserId());
+	}
+
+	@Test
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
+	public void getNonExistingUserModeScoresTest() {
+		assertEquals(0, scoreService.getUserModeScores(0, "mode").size());
+	}
+
+	@Test
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
+	public void getUserThemeScoresTest() {
+		List<ScoreDto> scores = scoreService.getUserThemeScores(1, "theme1");
+		
+		assertEquals(2, scores.size());
+		for(ScoreDto score : scores) assertEquals(1, score.getUserId());
+	}
+
+	@Test
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
+	public void getNonExistingUserThemeScoresTest() {
+		assertEquals(0, scoreService.getUserThemeScores(0, "theme1").size());
+	}
+
+	@Test
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
+	public void getAllScoresTest() {
+		assertEquals(5, scoreService.getAllScores().size());
+	}
+
+	@Test
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
+	public void getAllModeScoresTest() {
+		assertEquals(3, scoreService.getAllModeScores("mode1").size());
+	}
+
+	@Test
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
+	public void getAllThemeScoresTest() {
+		assertEquals(3, scoreService.getAllThemeScores("theme1").size());
+	}
+
+	@Test
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
+	public void addScoreTest() {
 		ScoreDto sd = new ScoreDto(), scoreDb;
 		
 		sd.setUserId(1);
@@ -380,7 +396,6 @@ public class CuicuizzUsersApplicationTests {
 		sd.setValue("value");
 		
 		scoreDb = scoreService.addScore(sd);
-		scoreMapper.deleteScore(ScoreConverter.convertDtoToEntity(scoreDb));
 		
 		assertEquals(sd.getUserId(), scoreDb.getUserId());
 		assertEquals(sd.getMode(), scoreDb.getMode());
@@ -388,15 +403,15 @@ public class CuicuizzUsersApplicationTests {
 		assertEquals(sd.getNbQuestions(), scoreDb.getNbQuestions());
 		assertEquals(sd.getNbSuccess(), scoreDb.getNbSuccess());
 		assertEquals(sd.getValue(), scoreDb.getValue());
-		
 	}
-	
+
 	@Test
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
 	public void addExistingScoreTest() {
 		Score score = new Score();
 		ScoreDto sd, scoreDb;
-		
-		score.setId(5);
+
 		score.setUserId(1);
 		score.setMode("mode");
 		score.setTheme("theme");
@@ -407,13 +422,12 @@ public class CuicuizzUsersApplicationTests {
 		scoreMapper.addScore(score);
 		
 		sd = ScoreConverter.convertEntityToDto(score);
+		sd.setId(scoreMapper.getUserScore(1, "mode", "theme").getId());
 		sd.setNbQuestions(4);
 		sd.setNbSuccess(5);
 		sd.setValue("new value");
 		
 		scoreDb = scoreService.addScore(sd);
-		
-		scoreMapper.deleteScore(ScoreConverter.convertDtoToEntity(scoreDb));
 		
 		assertEquals(sd.getUserId(), scoreDb.getUserId());
 		assertEquals(sd.getMode(), scoreDb.getMode());
@@ -426,85 +440,108 @@ public class CuicuizzUsersApplicationTests {
 	/*
 	 * IUserService tests
 	 */
-	
+
 	@Test
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
 	public void serviceLoginTest() {
-		boolean isConnected;
-		
-		userService.login("pseudo2", "password");
-		isConnected = userService.isConnected("pseudo2");
-		userService.disconnect(userMapper.getUser("pseudo2").getId());
-		
-		assertTrue(isConnected);
+		assertTrue(userService.login("pseudo1", "password1"));
 	}
-	
+
 	@Test
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
 	public void serviceWrongLoginTest() {
-		boolean isConnected;
-		
-		userService.login("pseudo2", "wrong password");
-		isConnected = userService.isConnected("pseudo2");
-		userService.disconnect(userMapper.getUser("pseudo2").getId());
-		
-		assertFalse(isConnected);
+		assertFalse(userService.login("pseudo1", "wrong password"));
 	}
-	
+
 	@Test
-	public void serviceAddExistingUserTest() {
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
+	public void serviceNoLoginTest() {		
+		
+		assertFalse(userService.login(null, "password"));
+	}
+
+	@Test
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
+	public void serviceAddUserTest() {
+		UserDto user = new UserDto(), userDb = new UserDto();
+		
+		user.setPseudo("pseudo5");
+		user.setPassword("password5");
+		try { userDb = userService.addUser(user); }
+		catch (Exception e) { fail(e.getMessage()); }
+		
+		assertEquals(user.getPseudo(), userDb.getPseudo());
+		assertEquals(getHash(user.getPassword()), userDb.getPassword());
+	}
+
+	@Test(expected=Exception.class)
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
+	public void serviceAddExistingUserTest() throws Exception {
 		User user = new User();
 		
-		user.setId(3);
-		user.setPseudo("pseudo");
-		user.setPassword("password");
+		user.setPseudo("pseudo6");
+		user.setPassword("password6");
 		user.setLastActionDate("2019-03-20 15:00:00");
 		userMapper.addUser(user);
 		
-		try {
-			userService.addUser(UserConverter.convertEntityToDto(user));
-			fail("Should throw Exception");
-		} catch (Exception ignored) { userMapper.deleteUser(user); }
+		userService.addUser(UserConverter.convertEntityToDto(user));
 	}
-	
+
 	@Test
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
 	public void isConnectedTest() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		boolean isConnected;
 		
-		userMapper.updateLastActionDate(sdf.format(new Date()), userMapper.getUser("pseudo2").getId());
+		userMapper.updateLastActionDate(sdf.format(new Date()), userMapper.getUser("pseudo1").getId());
 		
-		isConnected = userService.isConnected("pseudo2");
-		userService.disconnect(userMapper.getUser("pseudo2").getId());
+		assertTrue(userService.isConnected("pseudo1"));
 		
-		assertTrue(isConnected);
-		assertFalse(userService.isConnected("pseudo2"));
+		userService.disconnect(userMapper.getUser("pseudo1").getId());
+		
+		assertFalse(userService.isConnected("pseudo1"));
 	}
-	
+
 	@Test
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
 	public void isNonExistingUserConnectedTest() {
-		assertFalse(userService.isConnected("pseudo"));
+		assertFalse(userService.isConnected("unknown pseudo"));
 	}
-	
+
 	@Test
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
 	public void disconnectTest() {
-		userService.login("pseudo2", "password");
-		userService.disconnect(userMapper.getUser("pseudo2").getId());
+		userService.login("pseudo1", "password");
+		userService.disconnect(userMapper.getUser("pseudo1").getId());
 		
-		assertFalse(userService.isConnected("pseudo2"));
+		assertFalse(userService.isConnected("pseudo1"));
 	}
-	
+
 	@Test
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
 	public void disconnectDisconnectedUserTest() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
-		userMapper.updateLastActionDate(sdf.format(new Date(0)), userMapper.getUser("pseudo2").getId());
+		userMapper.updateLastActionDate(sdf.format(new Date(0)), userMapper.getUser("pseudo1").getId());
 		
-		try { userService.disconnect(userMapper.getUser("pseudo2").getId()); } catch (Exception e) { fail(e.getMessage()); }
-		assertFalse(userService.isConnected("pseudo2"));
+		userService.disconnect(userMapper.getUser("pseudo1").getId());
+		
+		assertFalse(userService.isConnected("pseudo1"));
 	}
-	
+
 	@Test
+	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
+	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
 	public void disconnectNonExistingUserTest() {
-		try { userService.disconnect(0); } catch (Exception e) { fail(e.getMessage()); }
+		userService.disconnect(0);
 	}
 	
 	

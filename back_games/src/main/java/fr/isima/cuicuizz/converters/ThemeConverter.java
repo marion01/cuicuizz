@@ -12,7 +12,7 @@ import io.spring.guides.gs_producing_web_service.Theme;
  * @author fabie
  *
  */
-public class ThemeConverter {
+public interface ThemeConverter {
 
 	public static Theme convert(ThemeModel themeModel) {
 		final Theme theme = new Theme();

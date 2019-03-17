@@ -12,7 +12,7 @@ import io.spring.guides.gs_producing_web_service.Question;
  * @author fabie
  *
  */
-public class QuestionConverter {
+public interface QuestionConverter {
 
 	public static Question convert(QuestionModel questionModel) {
 		final Question question = new Question();
@@ -29,9 +29,5 @@ public class QuestionConverter {
 			questions.add(convert(questionModel));
 		}
 		return questions;
-	}
-
-	public QuestionModel convert(Question obj) {
-		return null;
 	}
 }

@@ -6,10 +6,12 @@ import java.security.NoSuchAlgorithmException;
 import fr.isima.cuicuizz.users.model.User;
 import io.spring.guides.gs_producing_web_service.UserDto;
 
-public class UserConverter {
+public interface UserConverter {
 
 	public static User convertDtoToEntity(UserDto dto) {
 		final User entity = new User();
+		
+		if (dto == null) return null;
 
 		entity.setId(dto.getId());
 		entity.setPseudo(dto.getPseudo());
@@ -34,14 +36,19 @@ public class UserConverter {
 			entity.setPassword(null);
 		}
 		entity.setLastActionDate(null);
+		
 		return entity;
 	}
 
 	public static UserDto convertEntityToDto(User entity) {
 		final UserDto dto = new UserDto();
+		
+		if (entity == null) return null;
+		
 		dto.setId(entity.getId());
 		dto.setPseudo(entity.getPseudo());
 		dto.setPassword(entity.getPassword());
+		
 		return dto;
 	}
 }

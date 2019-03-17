@@ -12,7 +12,7 @@ import io.spring.guides.gs_producing_web_service.Answer;
  * @author fabie
  *
  */
-public class AnswerConverter {
+public interface AnswerConverter {
 
 	public static Answer convert(AnswerModel answerModel) {
 		final Answer answer = new Answer();

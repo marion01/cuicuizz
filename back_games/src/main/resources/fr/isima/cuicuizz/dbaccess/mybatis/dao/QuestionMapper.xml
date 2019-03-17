@@ -8,7 +8,7 @@
 
 	
 	
-	<resultMap type="AnswerModel" id="AnswerModelMapper">
+	<resultMap type="fr.isima.cuicuizz.model.AnswerModel" id="AnswerModelMapper">
 		<id property="id" column="AnswerId" />
 		<result property="questionId" column="QuestionId" />
 		<result property="answer" column="Answer" />
@@ -17,7 +17,7 @@
 
 
 
-	<resultMap type="QuestionModel" id="QuestionModelMapper">
+	<resultMap type="fr.isima.cuicuizz.model.QuestionModel" id="QuestionModelMapper">
 		<id property="id" column="Id" />
 		<result property="question" column="Question" />
 		<result property="themeId" column="ThemeId" />
@@ -26,7 +26,7 @@
 
 
 
-	<resultMap type="ThemeModel" id="ThemeModelMapper">
+	<resultMap type="fr.isima.cuicuizz.model.ThemeModel" id="ThemeModelMapper">
 		<id property="id" column="Id" />
 		<result property="name" column="Name" />
 	</resultMap>
