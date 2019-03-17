@@ -13,6 +13,7 @@ public class QuestionConverter {
 		question.setId(questionModel.getId());
 		question.setValue(questionModel.getQuestion());
 		question.getAnswers().addAll(AnswerConverter.convert(questionModel.getAnswers()));
+		question.setTheme(questionModel.getThemeId());
 		return question;
 	}
 

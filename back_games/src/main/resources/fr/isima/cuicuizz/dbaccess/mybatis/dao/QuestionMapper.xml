@@ -25,6 +25,13 @@
 	</resultMap>
 
 
+
+	<resultMap type="ThemeModel" id="ThemeModelMapper">
+		<id property="id" column="Id" />
+		<result property="name" column="Name" />
+	</resultMap>
+
+
 	<select id="selectAllQuestions" resultMap="QuestionModelMapper">
 		SELECT q.Id,q.Question,q.ThemeId,a.Id as AnswerId, a.QuestionId,a.Answer,a.IsCorrect 
 		FROM Question q
@@ -37,8 +44,8 @@
 	</select>
 
 
-	<select id="getThemes" resultType="ThemeModel">
-		SELECT * FROM Theme
+	<select id="getThemes" resultMap="ThemeModelMapper">
+		SELECT * FROM Theme;
 	</select>
 </mapper>
 
