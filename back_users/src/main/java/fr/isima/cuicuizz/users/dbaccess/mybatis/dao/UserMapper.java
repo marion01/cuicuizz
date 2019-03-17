@@ -1,12 +1,11 @@
 package fr.isima.cuicuizz.users.dbaccess.mybatis.dao;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Result;
 
 import fr.isima.cuicuizz.users.model.User;
 
@@ -23,6 +22,9 @@ public interface UserMapper {
 	@Insert("INSERT INTO User (Pseudo, Password, LastActionDate) VALUES (#{u.pseudo},#{u.password},#{u.lastActionDate})")
 	@Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
 	int addUser(@Param("u") User u);
+	
+	@Delete("DELETE FROM User WHERE Pseudo=#{user.pseudo} AND Password=#{user.password}")
+	void deleteUser(@Param("user") User user);
 	
 	@Select("SELECT * FROM User WHERE Pseudo=#{pseudo}")
 	User getUser(@Param("pseudo") String pseudo);

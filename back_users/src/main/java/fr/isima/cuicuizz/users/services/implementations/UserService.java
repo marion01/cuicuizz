@@ -2,11 +2,13 @@ package fr.isima.cuicuizz.users.services.implementations;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import fr.isima.cuicuizz.users.converters.UserConverter;
 import fr.isima.cuicuizz.users.dbaccess.mybatis.dao.UserMapper;
 import fr.isima.cuicuizz.users.model.User;
@@ -31,10 +33,9 @@ public class UserService implements IUserService {
 				sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
 			}
 			User user = userMapper.login(pseudo,sb.toString());
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			if( user != null) {
-				DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Date now = new Date();
-				userMapper.updateLastActionDate(df.format(now), user.getId());
+				userMapper.updateLastActionDate(sdf.format(new Date()), user.getId());
 				return true;
 			}
 		} catch (NoSuchAlgorithmException e) {
@@ -58,9 +59,13 @@ public class UserService implements IUserService {
 		if(user == null) {
 			return false;
 		}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date now = new Date();
-		Date lastAction = user.getLastActionDate();
-		return now.getTime()-lastAction.getTime() <= 600000;
+		Date lastAction;
+		try {
+			lastAction = sdf.parse(user.getLastActionDate());
+			return now.getTime()-lastAction.getTime() <= 600000;
+		} catch (ParseException | NullPointerException e) { return false; }
 	}
 	
 	@Override
