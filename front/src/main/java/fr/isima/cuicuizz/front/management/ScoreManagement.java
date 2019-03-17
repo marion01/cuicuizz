@@ -1,31 +1,29 @@
 package fr.isima.cuicuizz.front.management;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 
-import fr.isima.cuicuizz.front.GetThemesResponse;
-import fr.isima.cuicuizz.front.Theme;
+import fr.isima.cuicuizz.front.ConnectedUser;
+import fr.isima.cuicuizz.front.ScoreDto;
+import fr.isima.cuicuizz.front.ScoreResponse;
+import fr.isima.cuicuizz.front.UserDto;
 import fr.isima.cuicuizz.front.Utils;
+import fr.isima.cuicuizz.front.mode.ModeEnum;
 import fr.isima.cuicuizz.front.services.IQuestionService;
-import fr.isima.cuicuizz.front.services.UserService;
+import fr.isima.cuicuizz.front.services.IUserService;
 
 @Controller
 public class ScoreManagement {
 
-	private List<Theme> themes;
+	@Autowired
+	IUserService userService;
 
 	@Autowired
-	private IQuestionService questionService;
-
-	@Autowired
-	UserService userService;
+	IQuestionService questionService;
 
 	@Autowired
 	@Qualifier("ModeManagement")
@@ -34,20 +32,6 @@ public class ScoreManagement {
 	@Autowired
 	@Qualifier("ThemeManagement")
 	private IManagement themeManagement;
-
-	@PostConstruct
-	public void getTheme() {
-		final GetThemesResponse tr = questionService.getThemes();
-		themes = tr.getThemes();
-	}
-
-	// TODO a enlever quand appelle au back user
-	public void rempliScore() {
-		scores = new ArrayList<String>();
-		scores.add("scores1");
-		scores.add("scores2");
-		scores.add("scores3");
-	}
 
 	public int choose() throws IOException {
 		boolean invalidEntry = true;
@@ -72,56 +56,71 @@ public class ScoreManagement {
 		return nb;
 	}
 
-	// TODO normalement list de scrores et non de string
-	private List<String> scores;
-
 	public void handleChoice(int menuId) throws IOException {
-		// TODO appeller les bonnes fonctions du back user
 		int themeId, modeId;
+		String mode;
+		String theme;
+		ScoreResponse sc = null;
+		UserDto userDto = ConnectedUser.getInstance().getUserDto();
 		switch (menuId) {
 		case (0):
-			rempliScore();
-			// userService.getUserScores()
+			sc = userService.getUserScores(userDto);
 			break;
 		case (1):
-			rempliScore();
 			modeId = modeManagement.handling();
-			// userService.getUserModeScores(modeId)
+			mode = modeIdToName(modeId);
+			sc = userService.getUserModeScores(userDto, mode);
 			break;
 		case (2):
-			rempliScore();
 			themeId = themeManagement.handling();
-			// userService.getUserThemeScores(themeId)
+			theme = themeIdToName(themeId);
+			sc = userService.getUserThemeScores(userDto, theme);
 			break;
 		case (3):
-			rempliScore();
 			modeId = modeManagement.handling();
 			themeId = themeManagement.handling();
-			// userService.getUserScore(modeId, themeId)
+			theme = themeIdToName(themeId);
+			mode = modeIdToName(modeId);
+			sc = userService.getUserScore(userDto, theme, mode);
 			break;
 		case (4):
-			rempliScore();
-			// userService.getAllScores()
+			sc = userService.getAllScores();
 			break;
 		case (5):
-			rempliScore();
 			modeId = modeManagement.handling();
-			// userService.getAllModeScores(modeId)
+			mode = modeIdToName(modeId);
+			userService.getAllModeScores(mode);
 			break;
 		case (6):
-			rempliScore();
 			themeId = themeManagement.handling();
-			// userService.getAllThemeScores(themeId)
+		theme = themeIdToName(themeId);
+			sc = userService.getAllThemeScores(theme);
 			break;
 		}
 
-		displayScores();
+		displayScores(sc);
 	}
 
-	// TODO a modifier en fonction de ce qu'il y a dans l'object score
-	public void displayScores() {
-		for (final String s : scores) {
-			System.out.println(s);
+	public void displayScores(ScoreResponse sc) {
+		if (sc != null && sc.getScores() != null && !sc.getScores().isEmpty()) {
+			List<ScoreDto> scores = sc.getScores();
+			for (final ScoreDto s : scores) {
+				System.out.println("user " + s.getUserId() + " on mode " + s.getMode() + " and theme " + s.getTheme());
+				System.out.println(s.getNbSuccess() + " right answers on " + s.getNbQuestions());
+				System.out.println("score: " + s.getValue());
+				System.out.println();
+			}
+		} else {
+			System.out.println("There are no scores saved");
 		}
+
+	}
+
+	public String themeIdToName(int themeId) {
+		return questionService.getThemes().getThemes().get(themeId-1).getName();
+	}
+	
+	public String modeIdToName(int modeId) {
+		return ModeEnum.getById(modeId).getName();
 	}
 }

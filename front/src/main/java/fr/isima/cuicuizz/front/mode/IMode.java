@@ -12,7 +12,7 @@ public interface IMode {
 	 * Execute the correct mode
 	 * @throws IOException 
 	 */
-	public void execute(List<Question> questions, QuestionManagement qm) throws IOException;
+	public void execute(List<Question> questions, QuestionManagement qm, String theme) throws IOException;
 
 	public static IMode getInstance() {
 		return null;}

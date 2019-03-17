@@ -3,7 +3,9 @@ package fr.isima.cuicuizz.front.mode;
 import java.io.IOException;
 import java.util.List;
 
+import fr.isima.cuicuizz.front.ConnectedUser;
 import fr.isima.cuicuizz.front.Question;
+import fr.isima.cuicuizz.front.ScoreDto;
 import fr.isima.cuicuizz.front.management.QuestionManagement;
 
 public class Speed implements IMode {
@@ -12,7 +14,7 @@ public class Speed implements IMode {
 	QuestionManagement questionManagement;
 
 	@Override
-	public void execute(List<Question> questions, QuestionManagement qm) {
+	public void execute(List<Question> questions, QuestionManagement qm, String theme) {
 		this.questionManagement = qm;
 		System.out.println("Speed mode");
 		try {
@@ -23,6 +25,14 @@ public class Speed implements IMode {
 			System.out.println(time + "s");
 			System.out.println("You have " + nbTrue + " valid response");
 			questionManagement.visualizeCorrectResponse(questions);
+			
+			ScoreDto s = new ScoreDto();
+			s.setMode("Speed");
+			s.setTheme(theme);
+			s.setNbQuestions(questions.size());
+			s.setNbSuccess(nbTrue);
+			s.setValue("time: " + time);
+			ConnectedUser.getInstance().setScore(s);
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}

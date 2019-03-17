@@ -17,6 +17,8 @@ import fr.isima.cuicuizz.front.management.QuestionManagement;
 import fr.isima.cuicuizz.front.management.ScoreManagement;
 import fr.isima.cuicuizz.front.mode.ModeEnum;
 import fr.isima.cuicuizz.front.services.IQuestionService;
+import fr.isima.cuicuizz.front.services.IUserService;
+import fr.isima.cuicuizz.front.services.UserService;
 
 @Component
 @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
@@ -39,17 +41,81 @@ public class Game {
 	@Autowired
 	private ScoreManagement scoreManagement;
 	
+	@Autowired
+	private IUserService userService;
+	
+	private int themeId;
+	
 	private Game() {
 	}
 
 	public void begin() throws IOException {
+		System.out.println("0.Sign up");
+		System.out.println("1.Sign in");
+		System.out.println("Enter your choice");
+		int choice = -1;
+		boolean correctAnswer  = false;
+		while (!correctAnswer) {
+			choice = Utils.readEntryNumber();
+			if (choice < 0 && choice > 1) {
+				System.out.println("incorrect entry");
+			} else {
+				correctAnswer = true;
+			}
+		}
+		
+		switch (choice) {
+			case (0):
+				SignUp();
+				break;
+			case (1):
+				SignIn();
+				break;
+		}
+		
+		
+	}
+	
+	public void SignUp() throws IOException {
 		System.out.println("Enter your pseudo:");
 		final String pseudo = Utils.readEntryString();
-		final User user = User.getInstance();
+		
+		System.out.println("Enter your password:");
+		final String password = Utils.readEntryString();
+		
+		UserDto userDto = new UserDto();
+		userDto.setPseudo(pseudo);
+		userDto.setPassword(password);
+		User user = userService.addUser(userDto);
+		
+		if (user != null) {
+			System.out.println("You inscription has been made");
+		}
+		
+		begin();
+	}
+	
+	public void SignIn() throws IOException {
+		System.out.println("Enter your pseudo:");
+		final String pseudo = Utils.readEntryString();
+		final ConnectedUser user = ConnectedUser.getInstance();
 		user.setPseudo(pseudo);
+		
+		System.out.println("Enter your password:");
+		final String password = Utils.readEntryString();
+		UserDto userDto = new UserDto();
+		userDto.setPseudo(pseudo);
+		userDto.setPassword(password);
+		user.setUserDto(userDto);
 		System.out.println();
-
-		menu();
+		BooleanResponse br = userService.login(userDto);
+		if (br.isValue()) { // connection made
+			System.out.println("you are connected");
+			menu();
+		} else { //wrong connection
+			System.out.println("the pseudo or the password is incorrect");
+			begin();
+		}	
 	}
 
 	@PostConstruct
@@ -75,7 +141,9 @@ public class Game {
 				final ModeEnum mode = ModeEnum.getById(idMode);
 				final List<Question> questions = chooseThemeAndNumberQuestion();
 				try {
-					mode.getInstance().execute(questions, questionManagement);
+					String theme = questionService.getThemes().getThemes().get(themeId-1).getName();
+					mode.getInstance().execute(questions, questionManagement, theme);
+					Score score = userService.addScore(ConnectedUser.getInstance().getScore());
 				} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | IllegalAccessException
 						| IllegalArgumentException | InvocationTargetException e) {
 					e.printStackTrace();
@@ -91,7 +159,7 @@ public class Game {
 
 	public List<Question> chooseThemeAndNumberQuestion() throws IOException {
 
-		final int themeId = themeManagement.handling();
+		themeId = themeManagement.handling();
 		final int nbMax = questionService.getNbQuestionsFromTheme(1).getNbQuestions();
 		final int nb = questionManagement.getNumberQuestions(nbMax);
 		final GetQuestionResponse response = questionService.getQuestion(themeId, nb);

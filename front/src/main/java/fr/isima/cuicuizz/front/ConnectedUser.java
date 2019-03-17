@@ -1,14 +1,32 @@
 package fr.isima.cuicuizz.front;
 
-public class User {
-	private static User instance;
+public class ConnectedUser {
+	private static ConnectedUser instance;
 	
 	private String pseudo;
 	private String pseudoSecondPlayer;
+	private UserDto userDto;
+	private ScoreDto score;
 	
-	public static User getInstance() {
+	public UserDto getUserDto() {
+		return userDto;
+	}
+	
+	public ScoreDto getScore() {
+		return score;
+	}
+	
+	public void setUserDto(UserDto u) {
+		userDto = u;
+	}
+	
+	public void setScore(ScoreDto s) {
+		score = s;
+	}
+	
+	public static ConnectedUser getInstance() {
 		if (instance == null) {
-			instance = new User();
+			instance = new ConnectedUser();
 		} 
 		return instance;
 	}

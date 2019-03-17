@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.util.List;
 
 import fr.isima.cuicuizz.front.Question;
-import fr.isima.cuicuizz.front.User;
+import fr.isima.cuicuizz.front.ScoreDto;
+import fr.isima.cuicuizz.front.ConnectedUser;
 import fr.isima.cuicuizz.front.Utils;
 import fr.isima.cuicuizz.front.management.QuestionManagement;
 
@@ -14,16 +15,16 @@ public class Duel implements IMode {
 
 	int nbRightResponsePlayer1;
 	int nbRightResponsePlayer2;
-	User user;
+	ConnectedUser user;
 
 	QuestionManagement questionManagement;
 
 	@Override
-	public void execute(List<Question> questions, QuestionManagement qm) throws IOException {
+	public void execute(List<Question> questions, QuestionManagement qm, String theme) throws IOException {
 		this.questionManagement = qm;
 		System.out.println("Duel mode");
 		getPseudoSecondPlayer();
-		user = User.getInstance();
+		user = ConnectedUser.getInstance();
 		for (int i = 0; i < 10; i++)
 			System.out.println();
 
@@ -41,13 +42,29 @@ public class Duel implements IMode {
 		for (int i = 0; i < 10; i++)
 			System.out.println();
 
-		displayResult(questions);
+		int winner = displayResult(questions);
+		
+		ScoreDto s = new ScoreDto();
+		s.setMode("Duel");
+		s.setTheme(theme);
+		s.setNbQuestions(questions.size());
+		s.setNbSuccess(nbRightResponsePlayer1);
+		if (winner == 1)
+			s.setValue(user.getPseudo() + " win against" + user.getPseudoSecondPlayer());
+		else if (winner == 2)
+			s.setValue(user.getPseudoSecondPlayer() + "against "+ user.getPseudo());
+		else 
+			s.setValue("exaequo");
+		ConnectedUser.getInstance().setScore(s);
 	}
 
-	private void displayResult(List<Question> questions) {
+	private int displayResult(List<Question> questions) {
+		int winner = 0;
 		if (nbRightResponsePlayer1 > nbRightResponsePlayer2) {
+			winner = 1;
 			System.out.println(user.getPseudo() + " you win !!");
 		} else if (nbRightResponsePlayer1 < nbRightResponsePlayer2) {
+			winner = 2;
 			System.out.println(user.getPseudoSecondPlayer() + " you win !!");
 		} else {
 			System.out.println("exaequo !");
@@ -60,6 +77,7 @@ public class Duel implements IMode {
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}
+		return winner;
 	}
 
 	public static IMode getInstance() {
@@ -74,7 +92,7 @@ public class Duel implements IMode {
 		String pseudo;
 		try {
 			pseudo = Utils.readEntryString();
-			final User user = User.getInstance();
+			final ConnectedUser user = ConnectedUser.getInstance();
 			user.setPseudoSecondPlayer(pseudo);
 			System.out.println();
 		} catch (final IOException e) {
