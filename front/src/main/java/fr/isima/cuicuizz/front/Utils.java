@@ -13,7 +13,7 @@ public class Utils {
 		String string = "-1";
 		while (incorrectEntry) {
 			string = entry.readLine();
-			if (!string.matches("[0-9]*")) {
+			if (!string.matches("[0-9]+")) {
 				if (string.equals("exit"))
 					System.exit(1);
 				else
@@ -26,7 +26,7 @@ public class Utils {
 	}
 
 	public static String readEntryString() throws IOException {
-		String string = entry.readLine();
+		final String string = entry.readLine();
 		if (string.equals("exit"))
 			System.exit(1);
 		return string;

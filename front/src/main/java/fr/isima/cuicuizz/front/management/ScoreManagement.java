@@ -61,7 +61,7 @@ public class ScoreManagement {
 		String mode;
 		String theme;
 		ScoreResponse sc = null;
-		UserDto userDto = ConnectedUser.getInstance().getUserDto();
+		final UserDto userDto = ConnectedUser.getInstance().getUserDto();
 		switch (menuId) {
 		case (0):
 			sc = userService.getUserScores(userDto);
@@ -89,11 +89,11 @@ public class ScoreManagement {
 		case (5):
 			modeId = modeManagement.handling();
 			mode = modeIdToName(modeId);
-			userService.getAllModeScores(mode);
+			sc = userService.getAllModeScores(mode);
 			break;
 		case (6):
 			themeId = themeManagement.handling();
-		theme = themeIdToName(themeId);
+			theme = themeIdToName(themeId);
 			sc = userService.getAllThemeScores(theme);
 			break;
 		}
@@ -103,7 +103,7 @@ public class ScoreManagement {
 
 	public void displayScores(ScoreResponse sc) {
 		if (sc != null && sc.getScores() != null && !sc.getScores().isEmpty()) {
-			List<ScoreDto> scores = sc.getScores();
+			final List<ScoreDto> scores = sc.getScores();
 			for (final ScoreDto s : scores) {
 				System.out.println("user " + s.getUserId() + " on mode " + s.getMode() + " and theme " + s.getTheme());
 				System.out.println(s.getNbSuccess() + " right answers on " + s.getNbQuestions());
@@ -117,9 +117,9 @@ public class ScoreManagement {
 	}
 
 	public String themeIdToName(int themeId) {
-		return questionService.getThemes().getThemes().get(themeId-1).getName();
+		return questionService.getThemes().getThemes().get(themeId - 1).getName();
 	}
-	
+
 	public String modeIdToName(int modeId) {
 		return ModeEnum.getById(modeId).getName();
 	}

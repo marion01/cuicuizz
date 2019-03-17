@@ -8,7 +8,7 @@ public class CuicuizzQuestionsApplication {
 
 	public static void main(String[] args) {
 		// disable auto restart
-		System.setProperty("spring.devtools.restart.enabled", "true");
+		System.setProperty("spring.devtools.restart.enabled", "false");
 
 		SpringApplication.run(CuicuizzQuestionsApplication.class, args);
 	}

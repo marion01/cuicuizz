@@ -25,7 +25,6 @@ public class QuestionEndpoint {
 	@ResponsePayload
 	public GetQuestionResponse getQuestions(@RequestPayload GetQuestionRequest request) {
 		final GetQuestionResponse response = new GetQuestionResponse();
-		System.out.println("test");
 		response.getQuestions().addAll(questionService.findQuestion(request.getThemeId(), request.getNbQuestions()));
 		return response;
 	}
@@ -34,9 +33,6 @@ public class QuestionEndpoint {
 	@ResponsePayload
 	public GetNbQuestionResponse getNbQuestionFromTheme(@RequestPayload GetNbQuestionRequest request) {
 		final GetNbQuestionResponse response = new GetNbQuestionResponse();
-		System.out.println("test2");
-		System.out.println(request.getThemeId());
-		System.out.println(questionService.getNbQuestionFromTheme(request.getThemeId()));
 		response.setNbQuestions(questionService.getNbQuestionFromTheme(request.getThemeId()));
 		return response;
 	}

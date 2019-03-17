@@ -42,18 +42,18 @@ public class Duel implements IMode {
 		for (int i = 0; i < 10; i++)
 			System.out.println();
 
-		int winner = displayResult(questions);
-		
-		ScoreDto s = new ScoreDto();
+		final int winner = displayResult(questions);
+
+		final ScoreDto s = new ScoreDto();
 		s.setMode("Duel");
 		s.setTheme(theme);
 		s.setNbQuestions(questions.size());
 		s.setNbSuccess(nbRightResponsePlayer1);
 		if (winner == 1)
-			s.setValue(user.getPseudo() + " win against" + user.getPseudoSecondPlayer());
+			s.setValue(user.getPseudo() + " win against " + user.getPseudoSecondPlayer());
 		else if (winner == 2)
-			s.setValue(user.getPseudoSecondPlayer() + "against "+ user.getPseudo());
-		else 
+			s.setValue(user.getPseudoSecondPlayer() + "against " + user.getPseudo());
+		else
 			s.setValue("exaequo");
 		ConnectedUser.getInstance().setScore(s);
 	}
@@ -88,7 +88,7 @@ public class Duel implements IMode {
 	}
 
 	public void getPseudoSecondPlayer() {
-		System.out.println("Enter the pseudo the second player:");
+		System.out.println("Enter the pseudo of the second player:");
 		String pseudo;
 		try {
 			pseudo = Utils.readEntryString();
