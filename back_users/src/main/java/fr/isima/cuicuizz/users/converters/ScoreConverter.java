@@ -3,7 +3,17 @@ package fr.isima.cuicuizz.users.converters;
 import fr.isima.cuicuizz.users.model.Score;
 import io.spring.guides.gs_producing_web_service.ScoreDto;
 
+/**
+ * Class used as a Factory pattern to transform entity and dto Score
+ *
+ */
 public interface ScoreConverter {
+	
+	/**
+	 * Transforms a Dto score into a entity score
+	 * @param dto the dto to transform
+	 * @return the entity corresponding to the dto
+	 */
 	public static Score convertDtoToEntity(ScoreDto dto) {
 		final Score entity = new Score();
 		
@@ -21,6 +31,11 @@ public interface ScoreConverter {
 
 	}
 
+	/**
+	 * Transforms a entity score into a dto
+	 * @param entity the entity score to transform
+	 * @return the dto score corresponding to the entity
+	 */
 	public static ScoreDto convertEntityToDto(Score entity) {
 		final ScoreDto dto = new ScoreDto();
 		

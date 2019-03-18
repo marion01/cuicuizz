@@ -10,6 +10,10 @@ import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
 import org.springframework.xml.xsd.XsdSchema;
 
+/**
+ * User configuration class
+ *
+ */
 @EnableWs
 @Configuration
 public class UserServiceConfig extends WsConfigurerAdapter {

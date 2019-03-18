@@ -1,13 +1,44 @@
 package fr.isima.cuicuizz.users.model;
 
+/**
+ * the Model of score objects
+ *
+ */
 public class Score {
 	
+	/**
+	 * The id of the score
+	 */
 	private int id;
+	
+	/**
+	 * The id of the user of the score
+	 */
 	private int userId;
+	
+	/**
+	 * The mode name of the score
+	 */
 	private String mode;
+	
+	/**
+	 * The mode theme of the score
+	 */
 	private String theme;
+	
+	/**
+	 * The number of questions the user has to answer for this score
+	 */
 	private int nbQuestions;
+	
+	/**
+	 * The number of successful question the user has given for this score
+	 */
 	private int nbSuccess;
+	
+	/**
+	 * The value of the score
+	 */
 	private String value;
 	
 	public int getId() {

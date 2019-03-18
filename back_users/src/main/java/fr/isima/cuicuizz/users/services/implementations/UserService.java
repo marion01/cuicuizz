@@ -15,11 +15,22 @@ import fr.isima.cuicuizz.users.model.User;
 import fr.isima.cuicuizz.users.services.interfaces.IUserService;
 import io.spring.guides.gs_producing_web_service.UserDto;
 
+/**
+ * The service implementation class for users
+ *
+ */
 @Service
 public class UserService implements IUserService {
+	
+	/**
+	 * The user mapper
+	 */
 	@Autowired
 	private UserMapper userMapper;
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean login(String pseudo, String password) {
 		try {
@@ -44,6 +55,9 @@ public class UserService implements IUserService {
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public UserDto addUser(UserDto user) throws Exception {
 		if(userMapper.isPseudoExisting(user.getPseudo()) != 0) {
@@ -53,6 +67,9 @@ public class UserService implements IUserService {
 		return UserConverter.convertEntityToDto(userMapper.getUserByPseudo(user.getPseudo()));
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean isConnected(String pseudo) {
 		User user = userMapper.getUser(pseudo);
@@ -68,6 +85,9 @@ public class UserService implements IUserService {
 		} catch (ParseException | NullPointerException e) { return false; }
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void disconnect(int id) {
 		userMapper.updateLastActionDate("1900-01-01 00:00:00", id);
