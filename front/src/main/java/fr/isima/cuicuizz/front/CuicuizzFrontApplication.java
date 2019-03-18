@@ -12,6 +12,11 @@ public class CuicuizzFrontApplication {
 	@Autowired
 	public Game game;
 
+	/**
+	 * Main function of the application
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		// disable auto restart
 		System.setProperty("spring.devtools.restart.enabled", "false");

@@ -18,12 +18,17 @@ import fr.isima.cuicuizz.front.management.ScoreManagement;
 import fr.isima.cuicuizz.front.mode.ModeEnum;
 import fr.isima.cuicuizz.front.services.IQuestionService;
 import fr.isima.cuicuizz.front.services.IUserService;
-import fr.isima.cuicuizz.front.services.UserService;
 
+/**
+ * Class which handle the interaction with the user during his session
+ */
 @Component
 @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class Game {
 
+	/**
+	 * questions service
+	 */
 	@Autowired
 	private IQuestionService questionService;
 
@@ -41,14 +46,25 @@ public class Game {
 	@Autowired
 	private ScoreManagement scoreManagement;
 	
+	/**
+	 * users service
+	 */
 	@Autowired
 	private IUserService userService;
 	
+	/**
+	 * theme id selected for the last game played in the session
+	 */
 	private int themeId;
 	
 	private Game() {
 	}
 
+	/**
+	 * Display the first menu of the application and allow the user the sign up or sign in
+	 * 
+	 * @throws IOException
+	 */
 	public void begin() throws IOException {
 		System.out.println("0.Sign up");
 		System.out.println("1.Sign in");
@@ -71,21 +87,27 @@ public class Game {
 			case (1):
 				SignIn();
 				break;
-		}
-		
-		
+		}	
 	}
 	
+	/**
+	 * Ask the user to enter his pseudo and his password for his inscription
+	 * @throws IOException
+	 */
 	public void SignUp() throws IOException {
+		//recover pseudo
 		System.out.println("Enter your pseudo:");
 		final String pseudo = Utils.readEntryString();
 		
+		//recover password
 		System.out.println("Enter your password:");
 		final String password = Utils.readEntryString();
 		
 		UserDto userDto = new UserDto();
 		userDto.setPseudo(pseudo);
 		userDto.setPassword(password);
+		
+		//save the user
 		User user = userService.addUser(userDto);
 		
 		if (user != null) {
@@ -95,12 +117,19 @@ public class Game {
 		begin();
 	}
 	
+	/**
+	 * Handle the connection of the user
+	 * Redirect to the first menu (begin()) if the user isn't found
+	 * @throws IOException
+	 */
 	public void SignIn() throws IOException {
+		//recover pseudo
 		System.out.println("Enter your pseudo:");
 		final String pseudo = Utils.readEntryString();
 		final ConnectedUser user = ConnectedUser.getInstance();
 		user.setPseudo(pseudo);
 		
+		//recover password
 		System.out.println("Enter your password:");
 		final String password = Utils.readEntryString();
 		UserDto userDto = new UserDto();
@@ -108,6 +137,8 @@ public class Game {
 		userDto.setPassword(password);
 		user.setUserDto(userDto);
 		System.out.println();
+		
+		//log in
 		BooleanResponse br = userService.login(userDto);
 		if (br.isValue()) { // connection made
 			System.out.println("you are connected");
@@ -124,6 +155,10 @@ public class Game {
 		begin();
 	}
 
+	/**
+	 * Redirect to the history side of the application or the new game side
+	 * @throws IOException
+	 */
 	public void menu() throws IOException {
 		System.out.println("**** Menu ****");
 		System.out.println("0.Show history");
@@ -131,11 +166,11 @@ public class Game {
 
 		final int i = Utils.readEntryNumber();
 		switch (i) {
-		case (0):
+		case (0): //history
 			int choice = scoreManagement.choose();
 			scoreManagement.handleChoice(choice);
 			break;
-		case (1):
+		case (1): //new game
 			int idMode = modeManagement.handling();
 			if (idMode != ModeEnum.values().length) {
 				final ModeEnum mode = ModeEnum.getById(idMode);
@@ -157,6 +192,11 @@ public class Game {
 		System.out.println();
 	}
 
+	/**
+	 * Allow the user to choose the theme and the number of questions
+	 * @return
+	 * @throws IOException
+	 */
 	public List<Question> chooseThemeAndNumberQuestion() throws IOException {
 
 		themeId = themeManagement.handling();

@@ -9,8 +9,14 @@ import fr.isima.cuicuizz.front.ConnectedUser;
 import fr.isima.cuicuizz.front.Utils;
 import fr.isima.cuicuizz.front.management.QuestionManagement;
 
+/**
+ * Handle the duel mode
+ */
 public class Duel implements IMode {
 
+	/**
+	 * the instance of the mode
+	 */
 	private static Duel instance;
 
 	int nbRightResponsePlayer1;
@@ -19,6 +25,9 @@ public class Duel implements IMode {
 
 	QuestionManagement questionManagement;
 
+	/**
+	 * Execution of the duel mode
+	 */
 	@Override
 	public void execute(List<Question> questions, QuestionManagement qm, String theme) throws IOException {
 		this.questionManagement = qm;
@@ -58,6 +67,11 @@ public class Duel implements IMode {
 		ConnectedUser.getInstance().setScore(s);
 	}
 
+	/**
+	 * Display the result of the duel
+	 * @param questions
+	 * @return
+	 */
 	private int displayResult(List<Question> questions) {
 		int winner = 0;
 		if (nbRightResponsePlayer1 > nbRightResponsePlayer2) {
@@ -80,6 +94,10 @@ public class Duel implements IMode {
 		return winner;
 	}
 
+	/**
+	 * get the singleton instance
+	 * @return the instance
+	 */
 	public static IMode getInstance() {
 		if (instance == null) {
 			instance = new Duel();
@@ -87,6 +105,9 @@ public class Duel implements IMode {
 		return instance;
 	}
 
+	/**
+	 * ask the user for a second pseudo
+	 */
 	public void getPseudoSecondPlayer() {
 		System.out.println("Enter the pseudo of the second player:");
 		String pseudo;

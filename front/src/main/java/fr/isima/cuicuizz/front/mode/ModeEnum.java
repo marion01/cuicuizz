@@ -3,6 +3,10 @@ package fr.isima.cuicuizz.front.mode;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+/**
+ * Enum for all the mode available
+ *
+ */
 public enum ModeEnum{
 	
 	SPEED(0, "Speed", Speed.class),
@@ -43,6 +47,15 @@ public enum ModeEnum{
 		return name;
 	}
 	
+	/**
+	 * Get the correct instance of the mode selected
+	 * 
+	 * @return the instance
+	 * @throws ClassNotFoundException
+	 * @throws NoSuchMethodException
+	 * @throws IllegalAccessException
+	 * @throws InvocationTargetException
+	 */
 	public IMode getInstance() throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 		Class<?> c = Class.forName(clazz.getName());
 		Method method = c.getDeclaredMethod("getInstance");

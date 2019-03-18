@@ -13,6 +13,9 @@ public class Speed implements IMode {
 	private static Speed instance;
 	QuestionManagement questionManagement;
 
+	/**
+	 * Execute the speed mode
+	 */
 	@Override
 	public void execute(List<Question> questions, QuestionManagement qm, String theme) {
 		this.questionManagement = qm;
@@ -38,6 +41,10 @@ public class Speed implements IMode {
 		}
 	}
 
+	/**
+	 * get the singleton instance
+	 * @return the instance
+	 */
 	public static IMode getInstance() {
 		if (instance == null) {
 			instance = new Speed();

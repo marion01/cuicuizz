@@ -11,16 +11,28 @@ import fr.isima.cuicuizz.front.Answer;
 import fr.isima.cuicuizz.front.Question;
 import fr.isima.cuicuizz.front.Utils;
 
+/**
+ * Class which handle the interaction with the questions
+ */
 @Component
 @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class QuestionManagement {
 		
+	/**
+	 * Display the question and the answers and recover the user response
+	 * @param q the question
+	 * @return if the response of the user is correct
+	 * @throws IOException
+	 */
 	public boolean displayQuestion(Question q) throws IOException {
+		//display question and answers
 		System.out.println(q.getValue());
 		final List<Answer> answers = q.getAnswers();
 		for (int i = 0; i < answers.size(); i++) {
 			System.out.println(i + "." + answers.get(i).getAnswer());
 		}
+		
+		//recover the user response
 		int i = 0;
 		boolean wrongAnswer = true;
 		while (wrongAnswer) {
@@ -36,6 +48,11 @@ public class QuestionManagement {
 		return false;
 	}
 	
+	/**
+	 * Visualize the rights answers of the questions of the game
+	 * @param questions of the game
+	 * @throws IOException
+	 */
 	public void visualizeCorrectResponse(List<Question> questions) throws IOException {
 		System.out.println();
 		System.out.println("Wright answers :");
@@ -52,6 +69,7 @@ public class QuestionManagement {
 	}
 	
 	/**
+	 * Let the user respond to all the questions
 	 * 
 	 * @return the number of valid response of a player
 	 */
@@ -69,6 +87,12 @@ public class QuestionManagement {
 		return nbTrue;
 	}
 	
+	/**
+	 * Recover from the user the number of question wanted for the game
+	 * 
+	 * @param nbMax number max of question available
+	 * @return the number of question chosen
+	 */
 	public int getNumberQuestions(int nbMax) {
 		boolean tooManyQuestion = true;
 		System.out.println("Choose the number of questions:");
@@ -82,7 +106,6 @@ public class QuestionManagement {
 					System.out.println("There are not enough questions, choose less question");
 				}
 			} catch (final IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

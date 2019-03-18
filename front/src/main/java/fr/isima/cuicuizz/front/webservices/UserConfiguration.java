@@ -6,6 +6,10 @@ import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 
 @Configuration
 public class UserConfiguration {
+	/**
+	 * Definition of marshaller for User context
+	 * @return
+	 */
 	@Bean
 	public Jaxb2Marshaller marshaller() {
 		final Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
@@ -15,6 +19,11 @@ public class UserConfiguration {
 		return marshaller;
 	}
 	
+	/**
+	 * Definition of client for users based on the above marshaller
+	 * @param marshaller
+	 * @return
+	 */
 	@Bean
 	public UserClient userClient(Jaxb2Marshaller marshaller) {
 		final UserClient client = new UserClient();

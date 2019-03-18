@@ -14,6 +14,10 @@ public interface IMode {
 	 */
 	public void execute(List<Question> questions, QuestionManagement qm, String theme) throws IOException;
 
+	/**
+	 * Get the instance of the mode
+	 * @return
+	 */
 	public static IMode getInstance() {
 		return null;}
 }

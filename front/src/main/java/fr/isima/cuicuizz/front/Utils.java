@@ -8,6 +8,13 @@ public class Utils {
 
 	private static BufferedReader entry = new BufferedReader(new InputStreamReader(System.in));
 
+	/**
+	 * read in the console an int
+	 * If exit is written, the application is closed
+	 * 
+	 * @return the int entry
+	 * @throws IOException
+	 */
 	public static int readEntryNumber() throws IOException {
 		boolean incorrectEntry = true;
 		String string = "-1";
@@ -25,6 +32,13 @@ public class Utils {
 		return Integer.parseInt(string);
 	}
 
+	/**
+	 * Read a string in the console
+	 * If exit is written, the application is closed
+	 * 
+	 * @return the string read
+	 * @throws IOException
+	 */
 	public static String readEntryString() throws IOException {
 		final String string = entry.readLine();
 		if (string.equals("exit"))

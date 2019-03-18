@@ -8,14 +8,23 @@ import fr.isima.cuicuizz.front.Question;
 import fr.isima.cuicuizz.front.ScoreDto;
 import fr.isima.cuicuizz.front.management.QuestionManagement;
 
+/**
+ * Handle the normal mode
+ */
 public class Normal implements IMode {
 
 	private static Normal instance;
 
+	/**
+	 * list of questions of the mode
+	 */
 	private List<Question> questions;
 
 	QuestionManagement questionManagement;
 
+	/**
+	 * Execute the normal mode
+	 */
 	@Override
 	public void execute(List<Question> pQuestions, QuestionManagement qm, String theme) {
 		questionManagement = qm;
@@ -38,6 +47,10 @@ public class Normal implements IMode {
 		}
 	}
 
+	/**
+	 * get the singleton instance
+	 * @return the instance
+	 */
 	public static IMode getInstance() {
 		if (instance == null) {
 			instance = new Normal();

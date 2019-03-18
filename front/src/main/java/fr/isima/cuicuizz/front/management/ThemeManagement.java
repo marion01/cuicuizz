@@ -20,15 +20,24 @@ public class ThemeManagement implements IManagement {
 
 	private List<Theme> themes;
 
+	/**
+	 * question service
+	 */
 	@Autowired
 	private IQuestionService questionService;
 
+	/**
+	 * 
+	 */
 	@PostConstruct
 	public void getTheme() {
 		final GetThemesResponse tr = questionService.getThemes();
 		themes = tr.getThemes();
 	}
 
+	/**
+	 * Handle the choice of theme made by the user
+	 */
 	@Override
 	public int handling() throws IOException {
 		boolean falseEntry = true;
@@ -40,6 +49,9 @@ public class ThemeManagement implements IManagement {
 		return idMode;
 	}
 
+	/**
+	 * Display the theme recovered in question back to choose and recover the entry of the user
+	 */
 	@Override
 	public int choose() {
 		System.out.println("Choose the theme of the question:");
@@ -55,6 +67,10 @@ public class ThemeManagement implements IManagement {
 		return themeId + 1;
 	}
 
+	/**
+	 * Check if the entry made is correct
+	 * @return false if the entry isn't correct true otherwise
+	 */
 	@Override
 	public boolean handlingEntry(int idTheme) throws IOException {
 		boolean correctEntry = false;

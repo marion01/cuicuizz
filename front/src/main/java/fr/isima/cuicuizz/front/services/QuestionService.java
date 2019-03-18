@@ -14,16 +14,25 @@ public class QuestionService implements IQuestionService {
 	@Autowired
 	IQuestionClient questionClient;
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public GetQuestionResponse getQuestion(Integer id, Integer nbQuestions) {
 		return questionClient.getQuestion(id, nbQuestions);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public GetNbQuestionResponse getNbQuestionsFromTheme(Integer themeId) {
 		return questionClient.getNbQuestionsFromTheme(themeId);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public GetThemesResponse getThemes() {
 		return questionClient.getThemes();

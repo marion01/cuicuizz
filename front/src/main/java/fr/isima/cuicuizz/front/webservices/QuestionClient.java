@@ -14,6 +14,9 @@ import fr.isima.cuicuizz.front.GetThemesResponse;
 @Component
 public class QuestionClient extends WebServiceGatewaySupport implements IQuestionClient {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public GetQuestionResponse getQuestion(Integer id, Integer nbQuestions) {
 		final GetQuestionRequest request = new GetQuestionRequest();
@@ -22,7 +25,10 @@ public class QuestionClient extends WebServiceGatewaySupport implements IQuestio
 		return (GetQuestionResponse) getWebServiceTemplate().marshalSendAndReceive("http://localhost:8000/ws/questions",
 				request, new SoapActionCallback("http://spring.io/guides/gs-producing-web-service/GetQuestionRequest"));
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public GetNbQuestionResponse getNbQuestionsFromTheme(Integer themeId) {
 		final GetNbQuestionRequest request = new GetNbQuestionRequest();
@@ -32,6 +38,9 @@ public class QuestionClient extends WebServiceGatewaySupport implements IQuestio
 				new SoapActionCallback("http://spring.io/guides/gs-producing-web-service/GetNbQuestionRequest"));
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public GetThemesResponse getThemes() {
 		final GetThemesRequest request = new GetThemesRequest();

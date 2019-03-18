@@ -33,6 +33,11 @@ public class ScoreManagement {
 	@Qualifier("ThemeManagement")
 	private IManagement themeManagement;
 
+	/**
+	 * Display all the choice of historic and recover the choice of the user
+	 * @return the choice of the user
+	 * @throws IOException
+	 */
 	public int choose() throws IOException {
 		boolean invalidEntry = true;
 		int nb = -1;
@@ -56,6 +61,12 @@ public class ScoreManagement {
 		return nb;
 	}
 
+	/**
+	 * Ask what historic the user want and handle the choice
+	 * 
+	 * @param menuId
+	 * @throws IOException
+	 */
 	public void handleChoice(int menuId) throws IOException {
 		int themeId, modeId;
 		String mode;
@@ -63,35 +74,35 @@ public class ScoreManagement {
 		ScoreResponse sc = null;
 		final UserDto userDto = ConnectedUser.getInstance().getUserDto();
 		switch (menuId) {
-		case (0):
+		case (0): //all scores of the connected user
 			sc = userService.getUserScores(userDto);
 			break;
-		case (1):
+		case (1): //all scores of the connected user in a specific mode
 			modeId = modeManagement.handling();
 			mode = modeIdToName(modeId);
 			sc = userService.getUserModeScores(userDto, mode);
 			break;
-		case (2):
+		case (2): //all scores of the connected user in a specific theme
 			themeId = themeManagement.handling();
 			theme = themeIdToName(themeId);
 			sc = userService.getUserThemeScores(userDto, theme);
 			break;
-		case (3):
+		case (3): //all scores of the connected user in a specific mode and theme
 			modeId = modeManagement.handling();
 			themeId = themeManagement.handling();
 			theme = themeIdToName(themeId);
 			mode = modeIdToName(modeId);
 			sc = userService.getUserScore(userDto, theme, mode);
 			break;
-		case (4):
+		case (4): //all scores of the application
 			sc = userService.getAllScores();
 			break;
-		case (5):
+		case (5): //all scores of the application in a specific mode
 			modeId = modeManagement.handling();
 			mode = modeIdToName(modeId);
 			sc = userService.getAllModeScores(mode);
 			break;
-		case (6):
+		case (6): //all scores of the application in a specific theme
 			themeId = themeManagement.handling();
 			theme = themeIdToName(themeId);
 			sc = userService.getAllThemeScores(theme);
@@ -101,6 +112,10 @@ public class ScoreManagement {
 		displayScores(sc);
 	}
 
+	/**
+	 * Display scores 
+	 * @param sc
+	 */
 	public void displayScores(ScoreResponse sc) {
 		if (sc != null && sc.getScores() != null && !sc.getScores().isEmpty()) {
 			final List<ScoreDto> scores = sc.getScores();
@@ -116,10 +131,20 @@ public class ScoreManagement {
 
 	}
 
+	/**
+	 * convert a theme id in its name
+	 * @param themeId the theme id
+	 * @return
+	 */
 	public String themeIdToName(int themeId) {
 		return questionService.getThemes().getThemes().get(themeId - 1).getName();
 	}
 
+	/**
+	 * convert a mode id in its name
+	 * @param modeId the mode id
+	 * @return
+	 */
 	public String modeIdToName(int modeId) {
 		return ModeEnum.getById(modeId).getName();
 	}

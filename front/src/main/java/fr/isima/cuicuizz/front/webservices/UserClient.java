@@ -24,6 +24,9 @@ import fr.isima.cuicuizz.front.UserDto;
 @Component
 public class UserClient extends WebServiceGatewaySupport implements IUserClient {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ScoreResponse getUserScores(UserDto userDto) {
 		final GetUserScores request = new GetUserScores();
@@ -32,6 +35,9 @@ public class UserClient extends WebServiceGatewaySupport implements IUserClient 
 				request, new SoapActionCallback("http://spring.io/guides/gs-producing-web-service/getUserScores"));
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Score addScore(ScoreDto scoreDto) {
 		final AddScore request = new AddScore();
@@ -40,6 +46,9 @@ public class UserClient extends WebServiceGatewaySupport implements IUserClient 
 				request, new SoapActionCallback("http://spring.io/guides/gs-producing-web-service/addScore"));
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ScoreResponse getUserModeScores(UserDto userDto, String mode) {
 		final GetUserModeScores request = new GetUserModeScores();
@@ -49,6 +58,9 @@ public class UserClient extends WebServiceGatewaySupport implements IUserClient 
 				request, new SoapActionCallback("http://spring.io/guides/gs-producing-web-service/getUserModeScores"));
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ScoreResponse getUserThemeScores(UserDto userDto, String theme) {
 		final GetUserThemeScores request = new GetUserThemeScores();
@@ -58,6 +70,9 @@ public class UserClient extends WebServiceGatewaySupport implements IUserClient 
 				request, new SoapActionCallback("http://spring.io/guides/gs-producing-web-service/getUserThemeScores"));
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ScoreResponse getUserScore(UserDto userDto, String theme, String mode) {
 		final GetUserModeThemeScore request = new GetUserModeThemeScore();
@@ -69,6 +84,9 @@ public class UserClient extends WebServiceGatewaySupport implements IUserClient 
 				new SoapActionCallback("http://spring.io/guides/gs-producing-web-service/getUserModeThemeScore"));
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ScoreResponse getAllScores() {
 		final GetAllScores request = new GetAllScores();
@@ -76,6 +94,9 @@ public class UserClient extends WebServiceGatewaySupport implements IUserClient 
 				request, new SoapActionCallback("http://spring.io/guides/gs-producing-web-service/getAllScores"));
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ScoreResponse getAllModeScores(String mode) {
 		final GetAllModesScores request = new GetAllModesScores();
@@ -84,6 +105,9 @@ public class UserClient extends WebServiceGatewaySupport implements IUserClient 
 				request, new SoapActionCallback("http://spring.io/guides/gs-producing-web-service/getAllModesScores"));
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ScoreResponse getAllThemeScores(String theme) {
 		final GetAllThemesScores request = new GetAllThemesScores();
@@ -92,7 +116,9 @@ public class UserClient extends WebServiceGatewaySupport implements IUserClient 
 				request, new SoapActionCallback("http://spring.io/guides/gs-producing-web-service/getAllThemesScores"));
 	}
 	
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public User  addUser(UserDto userDto) {
 		final AddUser  request = new AddUser();
@@ -101,7 +127,9 @@ public class UserClient extends WebServiceGatewaySupport implements IUserClient 
 				request, new SoapActionCallback("http://spring.io/guides/gs-producing-web-service/addUser"));
 	}
 	
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public BooleanResponse login(UserDto userDto) {
 		final Login request = new Login();
@@ -109,9 +137,4 @@ public class UserClient extends WebServiceGatewaySupport implements IUserClient 
 		return (BooleanResponse) getWebServiceTemplate().marshalSendAndReceive("http://localhost:9000/ws/users",
 				request, new SoapActionCallback("http://spring.io/guides/gs-producing-web-service/login"));
 	}
-	
-	
-
-
-
 }

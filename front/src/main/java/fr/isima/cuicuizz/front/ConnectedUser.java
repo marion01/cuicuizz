@@ -1,11 +1,29 @@
 package fr.isima.cuicuizz.front;
 
 public class ConnectedUser {
+	/**
+	 * Instance of the connected user
+	 */
 	private static ConnectedUser instance;
 	
+	/**
+	 * pseudo of the connected user
+	 */
 	private String pseudo;
+	
+	/**
+	 * pseudo of the second player if the duel mode is run
+	 */
 	private String pseudoSecondPlayer;
+	
+	/**
+	 * userDto with the password and the pseudo of the user
+	 */
 	private UserDto userDto;
+	
+	/**
+	 * last score saved during the session
+	 */
 	private ScoreDto score;
 	
 	public UserDto getUserDto() {
@@ -24,6 +42,9 @@ public class ConnectedUser {
 		score = s;
 	}
 	
+	/**
+	 * @return the instance of connected user
+	 */
 	public static ConnectedUser getInstance() {
 		if (instance == null) {
 			instance = new ConnectedUser();
