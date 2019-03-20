@@ -156,7 +156,6 @@ public class Game {
 
 	@PostConstruct
 	public void launch() throws IOException {
-		Utils.readEntryString();
 		System.out.println("************* Welcome to cuicuizz !! :) *************\n");
 		begin();
 	}
