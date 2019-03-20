@@ -120,7 +120,7 @@ public class UserClient extends WebServiceGatewaySupport implements IUserClient 
 	 * {@inheritDoc}
 	 */
 	@Override
-	public User  addUser(UserDto userDto) {
+	public User  addUser(UserDto userDto) throws Exception{
 		final AddUser  request = new AddUser();
 		request.setUser(userDto);
 		return (User) getWebServiceTemplate().marshalSendAndReceive("http://localhost:9000/ws/users",
@@ -131,10 +131,10 @@ public class UserClient extends WebServiceGatewaySupport implements IUserClient 
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BooleanResponse login(UserDto userDto) {
+	public User login(UserDto userDto) {
 		final Login request = new Login();
 		request.setUser(userDto);
-		return (BooleanResponse) getWebServiceTemplate().marshalSendAndReceive("http://localhost:9000/ws/users",
+		return (User) getWebServiceTemplate().marshalSendAndReceive("http://localhost:9000/ws/users",
 				request, new SoapActionCallback("http://spring.io/guides/gs-producing-web-service/login"));
 	}
 }

@@ -41,6 +41,7 @@ public class Normal implements IMode {
 			s.setNbQuestions(questions.size());
 			s.setNbSuccess(nbTrue);
 			s.setValue(nbTrue+"/"+questions.size());
+			s.setUserId(ConnectedUser.getInstance().getUserDto().getId());
 			ConnectedUser.getInstance().setScore(s);
 		} catch (final IOException e) {
 			e.printStackTrace();

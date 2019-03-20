@@ -85,7 +85,7 @@ public class UserService implements IUserService{
 	 * {@inheritDoc}
 	 */
 	@Override
-	public User addUser(UserDto userDto) {
+	public User addUser(UserDto userDto) throws Exception{
 		return userClient.addUser(userDto);
 	}
 
@@ -93,7 +93,7 @@ public class UserService implements IUserService{
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BooleanResponse login(UserDto userDto) {
+	public User login(UserDto userDto) {
 		return userClient.login(userDto);
 	}
 

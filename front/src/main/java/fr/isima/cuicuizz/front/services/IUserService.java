@@ -72,12 +72,12 @@ public interface IUserService {
 	 * @param userDto
 	 * @return the user added
 	 */
-	public User addUser(UserDto userDto);
+	public User addUser(UserDto userDto) throws Exception;
 
 	/**
 	 * log in a user
 	 * @param userDto
 	 * @return if the connection is succesful
 	 */
-	public BooleanResponse login(UserDto userDto);
+	public User login(UserDto userDto);
 }

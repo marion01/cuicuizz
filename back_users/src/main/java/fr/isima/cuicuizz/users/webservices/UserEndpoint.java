@@ -6,6 +6,7 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
+import fr.isima.cuicuizz.users.converters.UserConverter;
 import fr.isima.cuicuizz.users.services.interfaces.IUserService;
 import io.spring.guides.gs_producing_web_service.AddUser;
 import io.spring.guides.gs_producing_web_service.BooleanResponse;
@@ -52,11 +53,13 @@ public class UserEndpoint {
 	 */
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "login")
 	@ResponsePayload
-	public BooleanResponse login(@RequestPayload Login dto) {
+	public User login(@RequestPayload Login dto) {
 		final UserDto uDto = dto.getUser();
-		final BooleanResponse br = new BooleanResponse();
-		br.setValue(userService.login(uDto.getPseudo(), uDto.getPassword()));
-		return br;
+		fr.isima.cuicuizz.users.model.User u = userService.login(uDto.getPseudo(), uDto.getPassword());
+		uDto.setId(u.getId());
+		final User response = new User();
+		response.setUserDto(uDto);
+		return response;
 	}
 
 	/**

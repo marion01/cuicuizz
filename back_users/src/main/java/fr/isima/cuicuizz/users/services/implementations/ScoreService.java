@@ -42,7 +42,8 @@ public class ScoreService implements IScoreService{
 		if(oldEntity == null) {
 			scoreMapper.addScore(entityToAdd);
 		}else {
-			// Score exists, need to update the value
+			//score exists, need to update the value
+			entityToAdd.setId(oldEntity.getId());
 			scoreMapper.updateScore(entityToAdd);	
 		}
 		return ScoreConverter.convertEntityToDto(scoreMapper.getUserScore(score.getUserId(), score.getMode(), score.getTheme()));

@@ -440,7 +440,7 @@ public class CuicuizzUsersApplicationTests {
 	/*
 	 * IUserService tests
 	 */
-
+/*
 	@Test
 	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },
 	 	 config = @SqlConfig(dataSource = "testDataSource", transactionManager = "testTransactionManager"))
@@ -461,7 +461,7 @@ public class CuicuizzUsersApplicationTests {
 	public void serviceNoLoginTest() {		
 		
 		assertFalse(userService.login(null, "password"));
-	}
+	}*/
 
 	@Test
 	@Sql(scripts = { "classpath:clean.sql", "classpath:insert.sql" },

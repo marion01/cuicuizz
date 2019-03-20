@@ -64,6 +64,7 @@ public class Duel implements IMode {
 			s.setValue(user.getPseudoSecondPlayer() + "against " + user.getPseudo());
 		else
 			s.setValue("exaequo");
+		s.setUserId(ConnectedUser.getInstance().getUserDto().getId());
 		ConnectedUser.getInstance().setScore(s);
 	}
 

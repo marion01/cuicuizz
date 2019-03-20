@@ -108,13 +108,17 @@ public class Game {
 		userDto.setPassword(password);
 		
 		//save the user
+		try {
 		User user = userService.addUser(userDto);
-		
 		if (user != null) {
 			System.out.println("You inscription has been made");
 		}
 		
 		begin();
+		} catch(Exception e) {
+			System.out.println("pseudo already taken");
+			SignUp();
+		}
 	}
 	
 	/**
@@ -139,9 +143,10 @@ public class Game {
 		System.out.println();
 		
 		//log in
-		BooleanResponse br = userService.login(userDto);
-		if (br.isValue()) { // connection made
+		User br = userService.login(userDto);
+		if (br!=null) { // connection made
 			System.out.println("you are connected");
+			user.getUserDto().setId(br.getUserDto().getId());
 			menu();
 		} else { //wrong connection
 			System.out.println("the pseudo or the password is incorrect");
@@ -151,6 +156,7 @@ public class Game {
 
 	@PostConstruct
 	public void launch() throws IOException {
+		Utils.readEntryString();
 		System.out.println("************* Welcome to cuicuizz !! :) *************\n");
 		begin();
 	}

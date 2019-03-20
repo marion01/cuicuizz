@@ -32,7 +32,7 @@ public class UserService implements IUserService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean login(String pseudo, String password) {
+	public User login(String pseudo, String password) {
 		try {
 			// Hash password
 			MessageDigest md;
@@ -47,12 +47,13 @@ public class UserService implements IUserService {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			if( user != null) {
 				userMapper.updateLastActionDate(sdf.format(new Date()), user.getId());
-				return true;
+				return user;
 			}
+
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
-		return false;
+		return null;
 	}
 
 	/**
